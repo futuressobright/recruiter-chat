@@ -1,0 +1,22 @@
+
+ADDITIONAL
+
+Code: Python, JavaScript, FastAPI, Flask, Express, React, Docker.
+AI/ML: Fast.ai, PyTorch, TensorFlow, Hugging Face, Ollama, Vertex AI, AWS Lambda, Amazon Bedrock.
+Data Science: NumPy, pandas, JupyterLab, SQL, scikit-learn, BigQuery, seaborn.
+Digital Marketing: Google Analytics, HubSpot, SFDC, Notion.
+Volunteer: Suicide hotline, SF Animal Care & Control (dog walker), Red Cross (100x donor).
+Interests: Running (barefoot marathoner, author, coach), chess (US age-group Top 50), indoor bouldering.
+
+
+
+
+EDUCATION
+
+Yale School of Management, New Haven, Connecticut 	 		                     	       	           		    MBA
+UC Berkeley, Berkeley, California			                                      BA Mathematics, Computer Science minor
+
+AWS, DeepLearning.AI: Certificate in Generative AI with Large Language Models, July 2024
+Google Cloud Training: Machine Learning Engineer Professional Certificate (in progress)
+2x top finisher at ML Hackathons, Summer 2024.
+
