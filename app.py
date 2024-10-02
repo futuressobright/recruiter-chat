@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 # Configuration
-PORT = int(os.environ.get('PORT', 5001))
+PORT = int(os.environ.get('PORT', 10000))
 HOST = '0.0.0.0'
 DOCUMENTS_DIR = 'documents'
 EMBEDDING_MODEL = 'sentence-transformers/all-MiniLM-L6-v2'
@@ -68,7 +68,7 @@ def chat():
         query_embedding = embedding_model.encode([user_message])
         distances, indices = index.search(query_embedding, k=TOP_K_CHUNKS)
         logger.debug(f"Retrieved chunks: {indices[0]}, distances: {distances[0]}")
-        
+
         relevant_chunks = [document_chunks[i] for i in indices[0]]
         logger.info(f"Found {len(relevant_chunks)} relevant chunks")
 
@@ -90,4 +90,4 @@ def chat():
 
 if __name__ == '__main__':
     logger.info(f"Server starting on http://{HOST}:{PORT}")
-    app.run(host=HOST, port=PORT, debug=True)
+    app.run(host=HOST, port=PORT, debug=False)
