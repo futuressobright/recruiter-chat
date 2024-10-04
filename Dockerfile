@@ -11,7 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose port 10000, for render.com
-EXPOSE 10000
+ENV PORT=8080
+EXPOSE $PORT
 
 # Run the Flask app
 CMD ["python", "app.py"]

@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 # Configuration
-PORT = int(os.environ.get('PORT', 10000))
+PORT = int(os.environ.get('PORT', 8080))
 HOST = '0.0.0.0'
 DOCUMENTS_DIR = 'documents'
 TOP_K_CHUNKS = 3
