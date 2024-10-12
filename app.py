@@ -3,13 +3,14 @@ from database import Database
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
+import logging
 
 load_dotenv()
 
 app = Flask(__name__)
+app.logger.setLevel(logging.INFO)
 db = Database()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
 
 @app.route('/')
 def home():
@@ -27,13 +28,13 @@ def chat():
         if not relevant_chunks:
             return jsonify({'response': "I couldn't find relevant information for your question."})
 
-        context = " ".join(relevant_chunks)
+        context = db.get_all_content()  # Provide full context
         app.logger.info(f"Context length: {len(context)}")
 
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-3.5-turbo",  # or "gpt-4" if you have access
             messages=[
-                {"role": "system", "content": f"Use this context to answer the user's question: {context}"},
+                {"role": "system", "content": f"You are an AI assistant answering questions based on the following context. Only use information from this context to answer questions: {context}"},
                 {"role": "user", "content": user_message}
             ]
         )
