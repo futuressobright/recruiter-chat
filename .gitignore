@@ -1,3 +1,6 @@
 venv/
 __pycache__/
 *.pyc
+*.BAK
+app.py.with.FAISS
+.env

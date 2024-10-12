@@ -1,0 +1,8 @@
+{
+  "services": [
+    {
+      "image": "heterodox/recruiter-chat:latest",
+      "name": "inspiring-perfection"
+    }
+  ]
+}
