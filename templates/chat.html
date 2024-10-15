@@ -6,21 +6,21 @@
     <title>Recruiter Chat</title>
     <style>
         body {
+            background-image: url('{{ background_image_url }}');
+            background-repeat: repeat;
+            background-size: 170px auto; /* Adjust this value to change tile size */
             font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
+            margin: 0;
             padding: 20px;
-            background-color: #f0f0f0;
+            min-height: 100vh;
         }
         .chat-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         #chat-messages {
             height: 400px;
@@ -28,38 +28,26 @@
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 10px;
-            background-color: #f9f9f9;
         }
         .message {
             margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 4px;
+            padding: 5px;
+            border-radius: 5px;
         }
         .user-message {
-            background-color: #e1f5fe;
+            background-color: #e6f2ff;
             text-align: right;
         }
         .bot-message {
-            background-color: #f0f4c3;
+            background-color: #f0f0f0;
         }
         #user-input {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            width: calc(100% - 70px);
+            padding: 5px;
         }
         #send-button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        #send-button:hover {
-            background-color: #45a049;
+            width: 60px;
+            padding: 5px;
         }
     </style>
 </head>
@@ -68,20 +56,19 @@
         <h1>Welcome to the Recruiter Chat</h1>
         <div id="chat-messages"></div>
         <input type="text" id="user-input" placeholder="Type your message...">
-        <button id="send-button">Send</button>
+        <button id="send-button" onclick="sendMessage()">Send</button>
     </div>
 
     <script>
-        const sessionId = "{{ session_id }}";
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-button');
 
-        function addMessage(message, isUser) {
-            const messageElement = document.createElement('div');
-            messageElement.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-            messageElement.textContent = message;
-            chatMessages.appendChild(messageElement);
+        function addMessage(content, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = content;
+            chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
@@ -92,42 +79,35 @@
                 userInput.value = '';
 
                 try {
-                    console.log('Sending message to server...');
                     const response = await fetch('/api/chat', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({
-                            session_id: sessionId,
-                            message: message,
-                        }),
+                        body: JSON.stringify({ message, session_id: '{{ session_id }}' }),
                     });
 
-                    if (response.ok) {
-                        console.log('Received response from server');
-                        const data = await response.json();
-                        addMessage(data.response, false);
-                    } else {
-                        console.error('Failed to get response from server:', await response.text());
-                        addMessage("Sorry, I couldn't process your request. Please try again.", false);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
+
+                    const data = await response.json();
+                    addMessage(data.response, false);
                 } catch (error) {
                     console.error('Error:', error);
-                    addMessage("Sorry, an error occurred. Please try again.", false);
+                    addMessage('Sorry, there was an error processing your request.', false);
                 }
             }
         }
 
-        sendButton.addEventListener('click', sendMessage);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
+        userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
                 sendMessage();
             }
         });
 
-        // Add an initial bot message
-        addMessage("Hello! I'm here to assist you with any questions about the candidate. How can I help you today?", false);
+        // Initial greeting
+        addMessage('Hello! How can I assist you today?', false);
     </script>
 </body>
 </html>
