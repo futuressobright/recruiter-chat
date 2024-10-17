@@ -1,17 +1,13 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for, send_from_directory
-from database import Database
+import json
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
 import random
 import string
+from database import Database
 from logger import log_session, log_interaction
 from image_utils import get_background_image, get_color_scheme, setup_background_image, validate_image
-
-DEFAULT_COLOR_SCHEME = {
-    'dominant_color': '#FFFFFF',
-    'palette': ['#000000', '#333333', '#666666', '#999999', '#CCCCCC']
-}
 
 load_dotenv()
 
@@ -29,6 +25,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
+DEFAULT_COLOR_SCHEME = {
+    'dominant_color': '#000080',  # Navy blue
+    'palette': ['#FFD700', '#FFFFFF', '#000080', '#8B4513', '#A52A2A']  # Gold, White, Navy, SaddleBrown, Brown
+}
 
 def generate_unique_url():
     while True:
@@ -38,13 +38,11 @@ def generate_unique_url():
         if unique_id not in active_sessions:
             return unique_id
 
-
 @app.route('/')
 def home():
     unique_id = generate_unique_url()
     active_sessions[unique_id] = {"chat_history": []}
     return redirect(url_for('chat_session', session_id=unique_id))
-
 
 @app.route('/chat/<session_id>')
 def chat_session(session_id):
@@ -54,31 +52,40 @@ def chat_session(session_id):
     log_session(session_id)
 
     try:
-        background_image = get_background_image()
-        validate_image(background_image)  # Additional validation
+        with open('config.json', 'r') as f:
+            config = json.load(f)
+        background_image = config.get('company_logo', 'static/default_background.png')
+        validate_image(background_image)
         background_image_filename = setup_background_image(app, background_image)
         background_image_url = url_for('uploaded_file', filename=background_image_filename)
         color_scheme = get_color_scheme(background_image)
-    except ValueError as e:
-        # Log the error
+    except (FileNotFoundError, json.JSONDecodeError, ValueError) as e:
         print(f"Error processing background image: {str(e)}")
-        # Use a default background and color scheme
-        background_image_url = url_for('static', filename='default_background.jpg')
-        color_scheme = {
-            'dominant_color': '#FFFFFF',
-            'palette': ['#000000', '#333333', '#666666', '#999999', '#CCCCCC']
+        background_image_url = url_for('static', filename='default_background.png')
+        color_scheme = DEFAULT_COLOR_SCHEME
+
+    # Load candidate info
+    try:
+        with open('candidate_info.json', 'r') as f:
+            candidate_info = json.load(f)
+    except FileNotFoundError:
+        candidate_info = {
+            'linkedin_url': '',
+            'video_url': '',
+            'resume_url': ''
         }
 
     return render_template('chat.html',
                            session_id=session_id,
                            background_image_url=background_image_url,
-                           color_scheme=color_scheme)
-
+                           color_scheme=color_scheme,
+                           linkedin_url=candidate_info['linkedin_url'],
+                           video_url=candidate_info['video_url'],
+                           resume_url=candidate_info['resume_url'])
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
@@ -118,6 +125,7 @@ def chat():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.getenv('PORT', 8080)), debug=True)
+    port = int(os.environ.get('PORT', 8080))
+    print(f"Starting application on port {port}")
+    app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)

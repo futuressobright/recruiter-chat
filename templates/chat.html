@@ -5,60 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruiter Chat</title>
     <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
         body {
             background-image: url('{{ background_image_url }}');
-            background-repeat: repeat;
-            background-size: 170px auto; /* Adjust this value to change tile size */
-            font-family: Arial, sans-serif;
-            margin: 0;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
             padding: 20px;
-            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .candidate-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background-color: {{ color_scheme['dominant_color'] }};
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            width: 30%;
+        }
+        .info-box a {
+            color: white;
+            text-decoration: none;
         }
         .chat-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
+            flex-grow: 1;
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
         }
         #chat-messages {
-            height: 400px;
+            flex-grow: 1;
             overflow-y: auto;
-            border: 1px solid #ccc;
+            margin-bottom: 10px;
             padding: 10px;
-            margin-bottom: 10px;
-        }
-        .message {
-            margin-bottom: 10px;
-            padding: 5px;
-            border-radius: 5px;
-        }
-        .user-message {
-            background-color: #e6f2ff;
-            text-align: right;
-        }
-        .bot-message {
-            background-color: #f0f0f0;
+            border: 1px solid #ccc;
         }
         #user-input {
-            width: calc(100% - 70px);
+            width: 80%;
             padding: 5px;
         }
         #send-button {
-            width: 60px;
-            padding: 5px;
+            padding: 5px 10px;
+            background-color: {{ color_scheme['palette'][0] }};
+            color: white;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <h1>Welcome to the Recruiter Chat</h1>
-        <div id="chat-messages"></div>
-        <input type="text" id="user-input" placeholder="Type your message...">
-        <button id="send-button" onclick="sendMessage()">Send</button>
+    <div class="container">
+        <div class="candidate-info">
+            <div class="info-box">
+                <a href="{{ linkedin_url }}" target="_blank">LinkedIn Profile</a>
+            </div>
+            <div class="info-box">
+                <a href="{{ video_url }}" target="_blank">Candidate Video</a>
+            </div>
+            <div class="info-box">
+                <a href="{{ resume_url }}" target="_blank">Resume</a>
+            </div>
+        </div>
+        <div class="chat-container">
+            <h1>Welcome to the Recruiter Chat</h1>
+            <div id="chat-messages"></div>
+            <div>
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
     </div>
-
     <script>
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
@@ -108,6 +140,8 @@
 
         // Initial greeting
         addMessage('Hello! How can I assist you today?', false);
+
     </script>
 </body>
 </html>
+
