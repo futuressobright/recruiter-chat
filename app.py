@@ -30,13 +30,24 @@ DEFAULT_COLOR_SCHEME = {
     'palette': ['#FFD700', '#FFFFFF', '#000080', '#8B4513', '#A52A2A']  # Gold, White, Navy, SaddleBrown, Brown
 }
 
+def load_config():
+    try:
+        with open('config.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {'employer_name': 'default'}
+
+config = load_config()
+EMPLOYER_NAME = config.get('employer_name', 'default')
+
 def generate_unique_url():
     while True:
         random_string = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
         random_integer = random.randint(1000, 9999)
-        unique_id = f"{random_string}-{random_integer}"
+        unique_id = f"{EMPLOYER_NAME}-{random_string}{random_integer}"
         if unique_id not in active_sessions:
             return unique_id
+
 
 @app.route('/')
 def home():

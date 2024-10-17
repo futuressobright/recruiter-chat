@@ -60,6 +60,24 @@ def download_image(url, save_path):
     else:
         raise ValueError(f"Failed to download image. Status code: {response.status_code}")
 
+def prompt_for_employer_name():
+    while True:
+        name = input("Enter the employer's name (letters and numbers only, no spaces): ").strip()
+        if name.replace('-', '').isalnum():
+            return name.lower()
+        else:
+            print("Please enter a valid name using only letters, numbers, and hyphens.")
+
+def setup_config():
+    employer_name = prompt_for_employer_name()
+    config = {
+        'employer_name': employer_name,
+        'company_logo': ''  # This will be set by setup_company_logo()
+    }
+    with open('config.json', 'w') as f:
+        json.dump(config, f)
+    print(f"Employer name '{employer_name}' has been saved to config.")
+
 def setup_company_logo():
     while True:
         logo_input = input("Enter the path to the company logo file (PNG or JPEG, max 5MB) or a URL: ").strip()
@@ -84,7 +102,9 @@ def setup_company_logo():
             print(f"Error: {str(e)}")
             print("Please try again.")
 
-    config = {'company_logo': abs_path}
+    with open('config.json', 'r') as f:
+        config = json.load(f)
+    config['company_logo'] = abs_path
     with open('config.json', 'w') as f:
         json.dump(config, f)
 
@@ -92,6 +112,7 @@ def setup_company_logo():
 
 if __name__ == "__main__":
     print("Welcome to the admin setup!")
+    setup_config()
     setup_candidate_info()
     setup_company_logo()
     print("Setup complete!")
