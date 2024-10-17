@@ -49,6 +49,9 @@ def chat_session(session_id):
     if session_id not in active_sessions:
         return f"Invalid session: {session_id}", 404
 
+    # Clear chat history for new sessions
+    active_sessions[session_id]['chat_history'] = []
+
     log_session(session_id)
 
     try:
