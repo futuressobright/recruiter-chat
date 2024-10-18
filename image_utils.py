@@ -14,6 +14,24 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def reduce_image_intensity(image_path, opacity=0.8):
+    with Image.open(image_path) as img:
+        if img.mode != 'RGBA':
+            img = img.convert('RGBA')
+
+        # Create a white background
+        background = Image.new('RGBA', img.size, (255, 255, 255, 255))
+
+        # Blend the original image with the white background
+        img = Image.blend(background, img, opacity)
+
+        # Save the modified image
+        output_path = f"{os.path.splitext(image_path)[0]}_reduced.png"
+        img.save(output_path, 'PNG')
+
+    return output_path
+
+
 def validate_image(image_path):
     if not os.path.exists(image_path):
         raise ValueError("File does not exist")
@@ -80,11 +98,10 @@ def get_color_scheme(image_path):
     }
 
 
-def setup_background_image(app, background_image):
-    background_image_filename = os.path.basename(background_image)
-    destination = os.path.join(app.config['UPLOAD_FOLDER'], background_image_filename)
-
-    if not os.path.exists(destination):
-        shutil.copy(background_image, destination)
-
-    return background_image_filename
+def setup_background_image(app, image_path, opacity=0.5):
+    # Modify this function to use reduce_image_intensity
+    reduced_image_path = reduce_image_intensity(image_path, opacity)
+    filename = os.path.basename(reduced_image_path)
+    destination = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    os.rename(reduced_image_path, destination)
+    return filename
