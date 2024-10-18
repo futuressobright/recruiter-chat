@@ -78,25 +78,39 @@ def setup_config():
         json.dump(config, f)
     print(f"Employer name '{employer_name}' has been saved to config.")
 
+
+import os
+import json
+from urllib.parse import urlparse
+import requests
+from PIL import Image
+import io
+import shutil
+
+
+# ... (keep all the existing functions up to setup_config() unchanged)
+
 def setup_company_logo():
+    os.makedirs('static/images', exist_ok=True)
+
     while True:
         logo_input = input("Enter the path to the company logo file (PNG or JPEG, max 5MB) or a URL: ").strip()
-        
+
         try:
             if is_valid_url(logo_input):
                 file_name = "company_logo.png"  # Default name for downloaded files
-                save_path = os.path.join('uploads', file_name)
+                save_path = os.path.join('static', 'images', file_name)
                 downloaded_path = download_image(logo_input, save_path)
-                abs_path = os.path.abspath(downloaded_path)
             elif os.path.exists(logo_input):
                 validate_image(logo_input)
                 file_name = os.path.basename(logo_input)
-                save_path = os.path.join('uploads', file_name)
-                shutil.copy2(logo_input, save_path)
-                abs_path = os.path.abspath(save_path)
+                save_path = os.path.join('static', 'images', file_name)
+                if os.path.abspath(logo_input) != os.path.abspath(save_path):
+                    shutil.copy2(logo_input, save_path)
+                # If the file is already in the correct location, we don't need to copy it
             else:
                 raise ValueError("File not found. Please enter a valid file path or URL.")
-            
+
             break
         except Exception as e:
             print(f"Error: {str(e)}")
@@ -104,11 +118,12 @@ def setup_company_logo():
 
     with open('config.json', 'r') as f:
         config = json.load(f)
-    config['company_logo'] = abs_path
+    config['company_logo'] = file_name  # Store only the filename
     with open('config.json', 'w') as f:
         json.dump(config, f)
 
-    print(f"Company logo has been saved: {abs_path}")
+    print(f"Company logo has been saved: {file_name}")
+
 
 if __name__ == "__main__":
     print("Welcome to the admin setup!")

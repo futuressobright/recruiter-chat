@@ -11,3 +11,5 @@ app.log.*
 uploads
 static
 app.log.1
+candidate_info.json
+config.json
