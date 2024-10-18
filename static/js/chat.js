@@ -6,14 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function sendMessage() {
         const message = userInput.value.trim();
         if (message) {
-            addMessageToChat('You', message);
+            addMessageToChat('You', message, 'user-message');
             sendToServer(message);
             userInput.value = '';
         }
     }
 
-    function addMessageToChat(sender, message) {
+    function addMessageToChat(sender, message, className) {
         const messageElement = document.createElement('div');
+        messageElement.className = `message ${className}`;
         messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
         chatMessages.appendChild(messageElement);
         chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            addMessageToChat('AI', data.response);
+            addMessageToChat('AI', data.response, 'bot-message');
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -45,4 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
             sendMessage();
         }
     });
+
+    // Add initial bot message if it exists
+    const initialGreeting = chatMessages.querySelector('.bot-message');
+    if (initialGreeting) {
+        initialGreeting.className = 'message bot-message';
+    }
 });

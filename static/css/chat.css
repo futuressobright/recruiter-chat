@@ -20,10 +20,11 @@ body, html {
 .main-container {
     display: flex;
     height: 100vh;
-    padding: 20px;
+    padding: 30px 20px;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
+    margin-left: 10%
 }
 
 .sidebar {
@@ -103,8 +104,24 @@ body, html {
     border: 1px solid #e0e0e0;
 }
 
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    line-height: 1.5; /* Increased line height for better readability */
+}
+
+.bot-message {
+    background-color: #f0f0f0;
+}
+
+.user-message {
+    background-color: transparent;
+}
+
 .input-area {
     display: flex;
+    margin-top: 10px; /* Added margin to separate from chat messages */
 }
 
 #user-input {
@@ -122,3 +139,5 @@ body, html {
     border-radius: 0 5px 5px 0;
     cursor: pointer;
 }
+
+
