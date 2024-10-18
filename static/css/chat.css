@@ -31,6 +31,30 @@ body, html {
     padding-right: 20px;
 }
 
+.sidebar-logo {
+    display: block;
+    width: 100%;
+    padding-bottom: 100%; /* This maintains the square aspect ratio */
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-size: 60%; /* This shrinks the logo by 40% */
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.youtube-logo {
+    background-image: url('/static/images/youtube_logo.png');
+}
+
+.linkedin-logo {
+    background-image: url('/static/images/linkedin_logo.png');
+}
+
+.resume-logo {
+    background-image: url('/static/images/rhenium_logo.webp');
+}
+
 .sidebar-button {
     display: block;
     margin-bottom: 10px;
