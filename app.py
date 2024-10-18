@@ -11,7 +11,7 @@ from image_utils import get_background_image, get_color_scheme, setup_background
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 db = Database()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -19,7 +19,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 active_sessions = {}
 
 # Configuration
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'images'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 if not os.path.exists(UPLOAD_FOLDER):
@@ -55,6 +55,11 @@ def home():
     active_sessions[unique_id] = {"chat_history": []}
     return redirect(url_for('chat_session', session_id=unique_id))
 
+
+# Define the correct path for  static files
+app.static_folder = 'static'
+
+
 @app.route('/chat/<session_id>')
 def chat_session(session_id):
     if session_id not in active_sessions:
@@ -68,14 +73,19 @@ def chat_session(session_id):
     try:
         with open('config.json', 'r') as f:
             config = json.load(f)
-        background_image = config.get('company_logo', 'static/default_background.png')
-        validate_image(background_image)
-        background_image_filename = setup_background_image(app, background_image)
-        background_image_url = url_for('uploaded_file', filename=background_image_filename)
-        color_scheme = get_color_scheme(background_image)
+
+        # Use only the filename, not the full path
+        background_image = os.path.basename(config.get('company_logo', 'default_background.png'))
+
+        # Construct the correct URL for the background image
+        background_image_url = url_for('static', filename=f'images/{background_image}')
+
+        # For get_color_scheme, use the full path to the image file
+        image_path = os.path.join(app.static_folder, 'images', background_image)
+        color_scheme = get_color_scheme(image_path)
     except (FileNotFoundError, json.JSONDecodeError, ValueError) as e:
         print(f"Error processing background image: {str(e)}")
-        background_image_url = url_for('static', filename='default_background.png')
+        background_image_url = url_for('static', filename='images/default_background.png')
         color_scheme = DEFAULT_COLOR_SCHEME
 
     # Load candidate info
@@ -97,7 +107,8 @@ def chat_session(session_id):
                            video_url=candidate_info['video_url'],
                            resume_url=candidate_info['resume_url'])
 
-@app.route('/uploads/<filename>')
+
+@app.route('/images/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 

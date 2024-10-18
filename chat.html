@@ -4,183 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruiter Chat</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('{{ background_image_url }}');
-            background-repeat: repeat;
-            background-size: auto;
-            font-size: 36px;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-        .candidate-info {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            background-color: {{ color_scheme.dominant_color }};
-        }
-        .info-box {
-            padding: 10px;
-            border-radius: 5px;
-            flex-grow: 1;
-            margin: 0 5px;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        .info-box a {
-            color: {{ color_scheme.palette[1] }};
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .chat-container {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            background-color: white;
-        }
-        h1 {
-            color: {{ color_scheme.palette[2] }};
-            text-align: center;
-            margin-top: 0;
-        }
-        #chat-messages {
-            flex-grow: 1;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #f9f9f9;
-        }
-        .message {
-            margin-bottom: 15px;
-            clear: both;
-        }
-        .speaker {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .content {
-            margin-left: 20px;
-            margin-bottom: 10px;
-        }
-        .ai-message {
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            padding: 10px;
-        }
-        .user-message {
-            background-color: #e6f2ff;
-            border-radius: 10px;
-            padding: 10px;
-        }
-        .input-area {
-            display: flex;
-        }
-        #user-input {
-            flex-grow: 1;
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 36px;
-        }
-        #send-button {
-            background-color: {{ color_scheme.palette[0] }};
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 36px;
-            border-radius: 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
 </head>
 <body>
     <div class="container">
-        <div class="candidate-info">
-            <div class="info-box">
-                <a href="{{ linkedin_url }}" target="_blank">LinkedIn Profile</a>
-            </div>
-            <div class="info-box">
-                <a href="{{ video_url }}" target="_blank">Candidate Video</a>
-            </div>
-            <div class="info-box">
-                <a href="{{ resume_url }}" target="_blank">Resume</a>
-            </div>
+        <div class="logo-background">
+            <!-- 6 logo tiles will be created by CSS -->
         </div>
         <div class="chat-container">
-            <h1>Welcome to the Recruiter Chat</h1>
-            <div id="chat-messages"></div>
-            <div class="input-area">
-                <input type="text" id="user-input" placeholder="Type your message here...">
-                <button id="send-button">Send</button>
+            <div class="sidebar">
+                <a href="{{ linkedin_url }}" class="sidebar-button">LinkedIn Profile</a>
+                <a href="{{ video_url }}" class="sidebar-button">Candidate Video</a>
+                <a href="{{ resume_url }}" class="sidebar-button">Resume</a>
+            </div>
+            <div class="chat-box">
+                <h1>Welcome to the Recruiter Chat</h1>
+                <div id="chat-messages"></div>
+                <div class="input-area">
+                    <input type="text" id="user-input" placeholder="Type your message...">
+                    <button id="send-button">Send</button>
+                </div>
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatMessages = document.getElementById('chat-messages');
-            const userInput = document.getElementById('user-input');
-            const sendButton = document.getElementById('send-button');
-
-            function addMessage(speaker, content, isAI = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${isAI ? 'ai-message' : 'user-message'}`;
-                messageDiv.innerHTML = `
-                    <div class="speaker">${speaker}:</div>
-                    <div class="content">${content}</div>
-                `;
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            addMessage('AI', 'Hello! How can I assist you today?', true);
-
-            function sendMessage() {
-                const message = userInput.value.trim();
-                if (message) {
-                    addMessage('You', message);
-                    userInput.value = '';
-
-                    fetch('/api/chat', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            message: message,
-                            session_id: '{{ session_id }}'
-                        }),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        addMessage('AI', data.response, true);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        addMessage('AI', 'Sorry, there was an error processing your request.', true);
-                    });
-                }
-            }
-
-            sendButton.addEventListener('click', sendMessage);
-            userInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 </body>
 </html>
