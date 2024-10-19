@@ -73,23 +73,17 @@ def chat_session(session_id):
 
     # Generate initial AI greeting
     context = db.get_all_content()
-    initial_greeting = get_initial_greeting(context)  # Use the new function
+    initial_greeting = get_initial_greeting(context)
 
     # Add initial greeting to chat history
     active_sessions[session_id]['chat_history'].append({"role": "assistant", "content": initial_greeting})
-
 
     try:
         with open('config.json', 'r') as f:
             config = json.load(f)
 
-        # Use only the filename, not the full path
         background_image = os.path.basename(config.get('company_logo', 'default_background.png'))
-
-        # Construct the correct URL for the background image
         background_image_url = url_for('static', filename=f'images/{background_image}')
-
-        # For get_color_scheme, use the full path to the image file
         image_path = os.path.join(app.static_folder, 'images', background_image)
         color_scheme = get_color_scheme(image_path)
     except (FileNotFoundError, json.JSONDecodeError, ValueError) as e:
@@ -103,6 +97,7 @@ def chat_session(session_id):
             candidate_info = json.load(f)
     except FileNotFoundError:
         candidate_info = {
+            'first_name': 'Candidate',  # Default value if file is not found
             'linkedin_url': '',
             'video_url': '',
             'resume_url': ''
@@ -112,10 +107,11 @@ def chat_session(session_id):
                            session_id=session_id,
                            background_image_url=background_image_url,
                            color_scheme=color_scheme,
+                           first_name=candidate_info.get('first_name', 'Candidate'),  # Add this line
                            linkedin_url=candidate_info['linkedin_url'],
                            video_url=candidate_info['video_url'],
                            resume_url=candidate_info['resume_url'],
-                           initial_greeting=initial_greeting)  # Pass the initial greeting to the template
+                           initial_greeting=initial_greeting)
 
 
 @app.route('/images/<filename>')

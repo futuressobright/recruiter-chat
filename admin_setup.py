@@ -29,9 +29,9 @@ def prompt_for_url(prompt_text, validator_func):
 
 def setup_candidate_info():
     candidate_info = {
-        'linkedin_url': prompt_for_url("Enter the candidate's LinkedIn profile URL: ", is_valid_linkedin_url),
-        'video_url': prompt_for_url("Enter the URL of the candidate's video (YouTube): ", is_valid_youtube_url),
-        'resume_url': prompt_for_url("Enter the URL of the candidate's resume: ", is_valid_url)
+        'linkedin_url': prompt_for_url("Enter candidate's LinkedIn profile URL: ", is_valid_linkedin_url),
+        'video_url': prompt_for_url("Enter URL candidate's video (YouTube) URL: ", is_valid_youtube_url),
+        'resume_url': prompt_for_url("Enter candidate's resume URL: ", is_valid_url)
     }
 
     with open('candidate_info.json', 'w') as f:
@@ -88,8 +88,6 @@ import io
 import shutil
 
 
-# ... (keep all the existing functions up to setup_config() unchanged)
-
 def setup_company_logo():
     os.makedirs('static/images', exist_ok=True)
 
@@ -125,9 +123,31 @@ def setup_company_logo():
     print(f"Company logo has been saved: {file_name}")
 
 
+def prompt_for_candidate_name():
+    while True:
+        name = input("Enter the candidate's first name: ").strip()
+        if name and name.replace(' ', '').isalpha():
+            return name
+        else:
+            print("Please enter a valid name using only letters.")
+
+def setup_candidate_info():
+    candidate_info = {
+        'first_name': prompt_for_candidate_name(),
+        'linkedin_url': prompt_for_url("Enter candidate's LinkedIn profile URL: ", is_valid_linkedin_url),
+        'video_url': prompt_for_url("Enter URL candidate's video (YouTube) URL: ", is_valid_youtube_url),
+        'resume_url': prompt_for_url("Enter candidate's resume URL: ", is_valid_url)
+    }
+
+    with open('candidate_info.json', 'w') as f:
+        json.dump(candidate_info, f)
+
+    print("Candidate information has been saved.")
+
+
 if __name__ == "__main__":
     print("Welcome to the admin setup!")
-    setup_config()
     setup_candidate_info()
+    setup_config()
     setup_company_logo()
     print("Setup complete!")
