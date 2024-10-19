@@ -22,12 +22,19 @@
         <div class="chat-container">
             <h1>Let's chat about my experience!</h1>
             <div id="chat-messages"></div>
+            <div id="initial-greeting" style="display: none;">{{ initial_greeting }}</div>
             <div class="input-area">
                 <input type="text" id="user-input" placeholder="Type your message...">
                 <button id="send-button">Send</button>
             </div>
         </div>
     </div>
+
+    <script>
+        var initialGreeting = "{{ initial_greeting | safe }}";
+    </script>
     <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+
 </body>
 </html>

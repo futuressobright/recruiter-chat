@@ -104,20 +104,27 @@ body, html {
     border: 1px solid #e0e0e0;
 }
 
+
 .message {
-    padding: 5px 10px; /* Reduced top and bottom padding */
-    margin-bottom: 5px; /* Reduced margin between messages */
-    border-radius: 5px;
-    line-height: 1.2; /* Keep your reduced line height */
+    max-width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    line-height: 1.4;
 }
 
 .bot-message {
     background-color: #f0f0f0;
+    align-self: flex-start;
 }
 
 .user-message {
-    background-color: transparent;
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    text-align: right;
 }
+
 
 .input-area {
     display: flex;

@@ -8,6 +8,8 @@ import string
 from database import Database
 from logger import log_session, log_interaction
 from image_utils import get_background_image, get_color_scheme, setup_background_image, validate_image
+from ai_utils import get_answer_from_openai, get_initial_greeting  # Add this import
+
 
 load_dotenv()
 
@@ -67,8 +69,15 @@ def chat_session(session_id):
 
     # Clear chat history for new sessions
     active_sessions[session_id]['chat_history'] = []
-
     log_session(session_id)
+
+    # Generate initial AI greeting
+    context = db.get_all_content()
+    initial_greeting = get_initial_greeting(context)  # Use the new function
+
+    # Add initial greeting to chat history
+    active_sessions[session_id]['chat_history'].append({"role": "assistant", "content": initial_greeting})
+
 
     try:
         with open('config.json', 'r') as f:
@@ -105,7 +114,8 @@ def chat_session(session_id):
                            color_scheme=color_scheme,
                            linkedin_url=candidate_info['linkedin_url'],
                            video_url=candidate_info['video_url'],
-                           resume_url=candidate_info['resume_url'])
+                           resume_url=candidate_info['resume_url'],
+                           initial_greeting=initial_greeting)  # Pass the initial greeting to the template
 
 
 @app.route('/images/<filename>')
@@ -122,23 +132,8 @@ def chat():
         if session_id not in active_sessions:
             return jsonify({"error": "Invalid session"}), 400
 
-        relevant_chunks = db.search(user_message)
-
-        if not relevant_chunks:
-            return jsonify({'response': "I couldn't find relevant information for your question."})
-
         context = db.get_all_content()
-
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system",
-                 "content": f"You are an AI assistant answering questions based on the following context. Only use information from this context to answer questions: {context}"},
-                {"role": "user", "content": user_message}
-            ]
-        )
-
-        bot_message = response.choices[0].message.content
+        bot_message = get_answer_from_openai(user_message, context)  # Use the updated function
 
         # Add messages to chat history
         active_sessions[session_id]['chat_history'].append({"role": "user", "content": user_message})

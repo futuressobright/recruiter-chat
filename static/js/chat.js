@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
 
+    // Display initial greeting if it exists
+    if (initialGreeting && initialGreeting.trim() !== "") {
+        addMessageToChat('AI', initialGreeting, 'bot-message');
+    }
+
     function sendMessage() {
         const message = userInput.value.trim();
         if (message) {
@@ -15,7 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function addMessageToChat(sender, message, className) {
         const messageElement = document.createElement('div');
         messageElement.className = `message ${className}`;
-        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        if (sender === 'AI') {
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        } else {
+            messageElement.textContent = message;  // No "You:" prefix for user messages
+        }
         chatMessages.appendChild(messageElement);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
@@ -37,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch((error) => {
             console.error('Error:', error);
+            addMessageToChat('System', 'An error occurred while processing your request.', 'error-message');
         });
     }
 
@@ -46,10 +56,4 @@ document.addEventListener('DOMContentLoaded', function() {
             sendMessage();
         }
     });
-
-    // Add initial bot message if it exists
-    const initialGreeting = chatMessages.querySelector('.bot-message');
-    if (initialGreeting) {
-        initialGreeting.className = 'message bot-message';
-    }
 });
