@@ -42,19 +42,38 @@ body, html {
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* Add smooth transition for hover effects */
+}
+
+.sidebar-logo:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
 
 .youtube-logo {
     background-image: url('/static/images/youtube_logo.png');
 }
 
+.youtube-logo:hover {
+    background-color: rgba(255, 0, 0, 0.1); /* Slight red tint for YouTube */
+}
+
 .linkedin-logo {
     background-image: url('/static/images/linkedin_logo.png');
+}
+
+.linkedin-logo:hover {
+    background-color: rgba(0, 119, 181, 0.1); /* Slight blue tint for LinkedIn */
 }
 
 .resume-logo {
     background-image: url('/static/images/rhenium_logo.webp');
 }
+
+.resume-logo:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Slight dark tint for resume */
+}
+
 
 .sidebar-button {
     display: block;
