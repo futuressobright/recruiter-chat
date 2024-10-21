@@ -8,8 +8,7 @@ import string
 from database import Database
 from logger import log_session, log_interaction
 from image_utils import get_background_image, get_color_scheme, setup_background_image, validate_image
-from ai_utils import get_answer_from_openai, get_initial_greeting  # Add this import
-
+from ai_utils import get_answer_from_openai, get_initial_greeting
 
 load_dotenv()
 
@@ -33,14 +32,21 @@ DEFAULT_COLOR_SCHEME = {
 }
 
 def load_config():
+    """Load configuration with consistent defaults for all required settings."""
+    default_config = {
+        'employer_name': 'default',
+        'company_logo': 'default_background.png'
+    }
     try:
         with open('config.json', 'r') as f:
-            return json.load(f)
+            loaded_config = json.load(f)
+            # Merge loaded config with defaults, preserving any additional keys
+            return {**default_config, **loaded_config}
     except FileNotFoundError:
-        return {'employer_name': 'default'}
+        return default_config
 
 config = load_config()
-EMPLOYER_NAME = config.get('employer_name', 'default')
+EMPLOYER_NAME = config['employer_name']
 
 def generate_unique_url():
     while True:
@@ -50,17 +56,14 @@ def generate_unique_url():
         if unique_id not in active_sessions:
             return unique_id
 
-
 @app.route('/')
 def home():
     unique_id = generate_unique_url()
     active_sessions[unique_id] = {"chat_history": []}
     return redirect(url_for('chat_session', session_id=unique_id))
 
-
-# Define the correct path for  static files
+# Define the correct path for static files
 app.static_folder = 'static'
-
 
 @app.route('/chat/<session_id>')
 def chat_session(session_id):
@@ -79,14 +82,11 @@ def chat_session(session_id):
     active_sessions[session_id]['chat_history'].append({"role": "assistant", "content": initial_greeting})
 
     try:
-        with open('config.json', 'r') as f:
-            config = json.load(f)
-
-        background_image = os.path.basename(config.get('company_logo', 'default_background.png'))
+        background_image = os.path.basename(config['company_logo'])
         background_image_url = url_for('static', filename=f'images/{background_image}')
         image_path = os.path.join(app.static_folder, 'images', background_image)
         color_scheme = get_color_scheme(image_path)
-    except (FileNotFoundError, json.JSONDecodeError, ValueError) as e:
+    except (ValueError, FileNotFoundError) as e:
         print(f"Error processing background image: {str(e)}")
         background_image_url = url_for('static', filename='images/default_background.png')
         color_scheme = DEFAULT_COLOR_SCHEME
@@ -107,12 +107,11 @@ def chat_session(session_id):
                            session_id=session_id,
                            background_image_url=background_image_url,
                            color_scheme=color_scheme,
-                           first_name=candidate_info.get('first_name', 'Candidate'),  # Add this line
+                           first_name=candidate_info.get('first_name', 'Candidate'),
                            linkedin_url=candidate_info['linkedin_url'],
                            video_url=candidate_info['video_url'],
                            resume_url=candidate_info['resume_url'],
                            initial_greeting=initial_greeting)
-
 
 @app.route('/images/<filename>')
 def uploaded_file(filename):
