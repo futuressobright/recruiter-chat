@@ -56,4 +56,23 @@ document.addEventListener('DOMContentLoaded', function() {
             sendMessage();
         }
     });
+
+    // New code for handling logo clicks
+    function openInNewWindow(url, windowName) {
+        const width = Math.floor(window.outerWidth * 0.8);
+        const height = Math.floor(window.outerHeight * 0.8);
+        const left = Math.floor((window.screenX + (window.outerWidth - width) / 2));
+        const top = Math.floor((window.screenY + (window.outerHeight - height) / 2));
+
+        window.open(url, windowName, `width=${width},height=${height},left=${left},top=${top}`);
+    }
+
+    // Add click event listeners to all sidebar logo links
+    document.querySelectorAll('.sidebar-logo').forEach(logo => {
+        logo.addEventListener('click', function(e) {
+            e.preventDefault();
+            const windowName = this.className.split(' ')[1].split('-')[0] + 'Window';
+            openInNewWindow(this.href, windowName);
+        });
+    });
 });
