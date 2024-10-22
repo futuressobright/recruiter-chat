@@ -6,12 +6,14 @@ from dotenv import load_dotenv
 import random
 import string
 from database import Database
-from logger import log_session, log_interaction
+from logger import log_session, log_interaction, configure_logging
 from image_utils import get_background_image, get_color_scheme, setup_background_image, validate_image
 from ai_utils import get_answer_from_openai, get_initial_greeting
 
 load_dotenv()
 
+# Configure logging
+configure_logging(os.getenv("LOGTAIL_SOURCE_TOKEN"))
 
 class SessionManager:
     def __init__(self, employer_name):
