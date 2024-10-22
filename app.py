@@ -12,12 +12,41 @@ from ai_utils import get_answer_from_openai, get_initial_greeting
 
 load_dotenv()
 
+
+class SessionManager:
+    def __init__(self, employer_name):
+        self.sessions = {}
+        self.employer_name = employer_name
+
+    def generate_unique_id(self):
+        while True:
+            random_string = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+            random_integer = random.randint(1000, 9999)
+            unique_id = f"{self.employer_name}-{random_string}{random_integer}"
+            if unique_id not in self.sessions:
+                return unique_id
+
+    def create_session(self):
+        session_id = self.generate_unique_id()
+        self.sessions[session_id] = {"chat_history": []}
+        log_session(session_id)
+        return session_id
+
+    def get_session(self, session_id):
+        return self.sessions.get(session_id)
+
+    def add_message(self, session_id, role, content):
+        if session_id in self.sessions:
+            self.sessions[session_id]['chat_history'].append({"role": role, "content": content})
+
+    def clear_history(self, session_id):
+        if session_id in self.sessions:
+            self.sessions[session_id]['chat_history'] = []
+
+
 app = Flask(__name__, static_url_path='/static')
 db = Database()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-# Dictionary to store active sessions
-active_sessions = {}
 
 # Configuration
 UPLOAD_FOLDER = 'images'
@@ -31,6 +60,7 @@ DEFAULT_COLOR_SCHEME = {
     'palette': ['#FFD700', '#FFFFFF', '#000080', '#8B4513', '#A52A2A']  # Gold, White, Navy, SaddleBrown, Brown
 }
 
+
 def load_config():
     """Load configuration with consistent defaults for all required settings."""
     default_config = {
@@ -43,6 +73,7 @@ def load_config():
             return {**default_config, **loaded_config}
     except FileNotFoundError:
         return default_config
+
 
 def load_candidate_info():
     """Load candidate information with consistent defaults."""
@@ -59,42 +90,34 @@ def load_candidate_info():
     except FileNotFoundError:
         return default_candidate
 
+
 # Load configurations at startup
 config = load_config()
 candidate_info = load_candidate_info()
-EMPLOYER_NAME = config['employer_name']
+session_manager = SessionManager(config['employer_name'])
 
-def generate_unique_url():
-    while True:
-        random_string = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
-        random_integer = random.randint(1000, 9999)
-        unique_id = f"{EMPLOYER_NAME}-{random_string}{random_integer}"
-        if unique_id not in active_sessions:
-            return unique_id
 
 @app.route('/')
 def home():
-    unique_id = generate_unique_url()
-    active_sessions[unique_id] = {"chat_history": []}
-    return redirect(url_for('chat_session', session_id=unique_id))
+    session_id = session_manager.create_session()
+    return redirect(url_for('chat_session', session_id=session_id))
+
 
 app.static_folder = 'static'
 
+
 @app.route('/chat/<session_id>')
 def chat_session(session_id):
-    if session_id not in active_sessions:
+    session = session_manager.get_session(session_id)
+    if not session:
         return f"Invalid session: {session_id}", 404
 
-    # Clear chat history for new sessions
-    active_sessions[session_id]['chat_history'] = []
-    log_session(session_id)
+    session_manager.clear_history(session_id)
 
     # Generate initial AI greeting
     context = db.get_all_content()
     initial_greeting = get_initial_greeting(context)
-
-    # Add initial greeting to chat history
-    active_sessions[session_id]['chat_history'].append({"role": "assistant", "content": initial_greeting})
+    session_manager.add_message(session_id, "assistant", initial_greeting)
 
     try:
         background_image = os.path.basename(config['company_logo'])
@@ -116,9 +139,11 @@ def chat_session(session_id):
                            resume_url=candidate_info['resume_url'],
                            initial_greeting=initial_greeting)
 
+
 @app.route('/images/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
@@ -127,21 +152,22 @@ def chat():
         user_message = data['message']
         session_id = data['session_id']
 
-        if session_id not in active_sessions:
+        if not session_manager.get_session(session_id):
             return jsonify({"error": "Invalid session"}), 400
 
         context = db.get_all_content()
         bot_message = get_answer_from_openai(user_message, context)
 
         # Add messages to chat history
-        active_sessions[session_id]['chat_history'].append({"role": "user", "content": user_message})
-        active_sessions[session_id]['chat_history'].append({"role": "assistant", "content": bot_message})
+        session_manager.add_message(session_id, "user", user_message)
+        session_manager.add_message(session_id, "assistant", bot_message)
 
         log_interaction(session_id, user_message, bot_message)
 
         return jsonify({'response': bot_message})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
