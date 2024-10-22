@@ -40,12 +40,28 @@ def load_config():
     try:
         with open('config.json', 'r') as f:
             loaded_config = json.load(f)
-            # Merge loaded config with defaults, preserving any additional keys
             return {**default_config, **loaded_config}
     except FileNotFoundError:
         return default_config
 
+def load_candidate_info():
+    """Load candidate information with consistent defaults."""
+    default_candidate = {
+        'first_name': 'Candidate',
+        'linkedin_url': '',
+        'video_url': '',
+        'resume_url': ''
+    }
+    try:
+        with open('candidate_info.json', 'r') as f:
+            loaded_info = json.load(f)
+            return {**default_candidate, **loaded_info}
+    except FileNotFoundError:
+        return default_candidate
+
+# Load configurations at startup
 config = load_config()
+candidate_info = load_candidate_info()
 EMPLOYER_NAME = config['employer_name']
 
 def generate_unique_url():
@@ -62,7 +78,6 @@ def home():
     active_sessions[unique_id] = {"chat_history": []}
     return redirect(url_for('chat_session', session_id=unique_id))
 
-# Define the correct path for static files
 app.static_folder = 'static'
 
 @app.route('/chat/<session_id>')
@@ -91,23 +106,11 @@ def chat_session(session_id):
         background_image_url = url_for('static', filename='images/default_background.png')
         color_scheme = DEFAULT_COLOR_SCHEME
 
-    # Load candidate info
-    try:
-        with open('candidate_info.json', 'r') as f:
-            candidate_info = json.load(f)
-    except FileNotFoundError:
-        candidate_info = {
-            'first_name': 'Candidate',  # Default value if file is not found
-            'linkedin_url': '',
-            'video_url': '',
-            'resume_url': ''
-        }
-
     return render_template('chat.html',
                            session_id=session_id,
                            background_image_url=background_image_url,
                            color_scheme=color_scheme,
-                           first_name=candidate_info.get('first_name', 'Candidate'),
+                           first_name=candidate_info['first_name'],
                            linkedin_url=candidate_info['linkedin_url'],
                            video_url=candidate_info['video_url'],
                            resume_url=candidate_info['resume_url'],
@@ -128,7 +131,7 @@ def chat():
             return jsonify({"error": "Invalid session"}), 400
 
         context = db.get_all_content()
-        bot_message = get_answer_from_openai(user_message, context)  # Use the updated function
+        bot_message = get_answer_from_openai(user_message, context)
 
         # Add messages to chat history
         active_sessions[session_id]['chat_history'].append({"role": "user", "content": user_message})
