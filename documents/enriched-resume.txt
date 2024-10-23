@@ -1,0 +1,177 @@
+Ashish Mukharji         ashish@ashish.org  ❖  (650) 387-9776  ❖  Oakland, California	
+
+Experienced leader: B2B software technology partnerships                                https://www.linkedin.com/in/ashishmukharji/
+
+
+EXPERIENCE 
+
+Intabyu.ai									     		   March 2023 – present
+CEO/developer			      	                                                        		        	           Oakland, California 
+AI-driven, candidate-focused platform for online interview practice and feedback.
+
+Openprise: RevOps automation platform for B2B data				      	           August 2021 – April 2022
+Head of Partnerships (contract)									        San Mateo, California
+Sourced and developed partnerships with 15 industry-leading data vendors: Clearbit, Equifax, Moody’s, etc.
+Developed and implemented data-testing rubric and analysis to score Account and Contact data.
+Presented recommendations to CEO and CRO; basis for a major new corporate revenue initiative.
+
+Stanford GSB: Teaching and Learning Hub					                    	May 2021 – March 2023
+Business Architect (contract)									        	            Stanford, California
+Developed content: wrote speeches, emails, presentations, policy documents.
+Designed and implemented surveys (in Qualtrics, Google Forms), analyzed and presented findings.
+Developed Google Apps script to gather and measure feedback from GSB clients.
+Managed the recruiting process for 20% team growth.
+ 
+UC Berkeley								   	           	    October 2017 – October 2020
+UC Berkeley Extension, Program Director								            Berkeley, California
+Managed five programs (1500 students), delivering turnaround (+100%) of US #2-ranked Accounting cert.
+Hired and managed a team of four program coordinators, 40 instructors of business, finance, economics.
+Organized and facilitated monthly Program Director round-table: brainstorming, goal-setting, consensus building.
+Managed Paralegal Studies program, including employer/market research, curriculum redesign.
+Managed customer support and advising for several thousand students.
+Extension Ventures, Director of Business Development									       
+Sourced and negotiated partnership deals with leading MOOCs, including Coursera, Udacity, OpenClassrooms.
+Evaluated OPMs including Yellowbrick, Pearson, Everspring, negotiated contracts.
+Internal consultant, advising on program growth based on feedback KPIs, financial models, and search volume.
+NAV-B, Director of Business Development											       
+Developed a Berkeley-wide financial framework for creating and evaluating  self-supporting degree programs.
+Advised Deans across the Berkeley campus, helping with long-term sustainability and growth planning.
+
+Appsembler: Open edX-based content-delivery SaaS platform.				           January 2017 – May 2017
+VP of Business Development  	 							      	            Berkeley, California 
+Drove the Microsoft partnership; Appsembler was chosen to deliver Microsoft Learning-as-a-Service (LaaS).
+Managed global channel and technology partner relationships, negotiated contracts.
+Wrote marketing messaging and tagline, named the product: Appsembler Tahoe.
+Developed sales playbook; managed sales pipeline in HubSpot.
+
+Midokura: Open-source cloud-networking startup, acquired by Sony   	             		     June 2015 – November 2016
+Director of Business Development  	 						                 Tokyo / Barcelona / San Francisco 
+Grew revenue by 40% through global partner network, managing enablement, marketing, and partner sales.
+Developed executive relationships with Dell, Fujitsu, Red Hat, Intel, leading to pricelisting by Dell and Fujitsu.
+Defined joint value proposition, developed and delivered online training for partner sales teams.
+Briefed industry analysts on product developments and strategy.
+Moderated industry panel at OpenStack Summit 2016 in Austin.
+
+
+
+
+Leadspace: Battery Ventures-backed Israeli (8200 group) MarTech SaaS startup	                        January 2014 – May 2015
+Director of Business Development  	 						                               San Francisco, California
+Grew revenue by 32% through partnership GTM, co-marketing, co-selling, training.
+Negotiated sell-through deals with demand-gen agencies: Bluewolf, DemandGen, LeadMD.
+Developed tech, marketing, and selling relationships within Eloqua (Oracle) and Marketo.
+Led all content creation: Case studies, blog, infographics, webinars.
+
+Heterodox Ventures: Technology partnerships, marketing, and strategy consulting			               2009 – present
+Principal						      	                                                                            Oakland, California 
+Client: O’Reilly Media [Tech publishing]  Product managed iOS application development.
+Client: FirstRain [SaaS, enterprise sales-enablement platform]  Wrote white paper, sales/marketing content.
+Client: UN University for Peace [Executive Education]  Advised marketing, ran Facebook campaigns.
+Client: Act-On  [SaaS, marketing automation]  Managed ISV partnerships.
+
+AMD (Advanced Micro Devices): CPUs and GPUs					     	                    2005 – 2009
+Senior Strategic Alliance Manager		 							           Toronto / Sunnyvale
+Managed partnerships with leading OEMs and ISVs: Sun Microsystems, HP, Adobe, SAS, Business Objects.
+Directed 30-person cross-functional team (marketing, sales, legal, engineering, finance) engaged in over a dozen AMD+Adobe tech and GTM initiatives.
+Drove Adobe agreement leading to +$4 million annual CPU sales.
+
+Sun Microsystems: Open-source desktop software for Solaris and Linux				                    2002 – 2005
+Senior Product Marketing Manager	 					                                               Hamburg / Sunnyvale
+Managed market and product requirements for StarOffice/OpenOffice.org open-source productivity suite.
+Developed and managed ISV GTM partnerships for Java Desktop System.
+
+
+
+ADDITIONAL
+
+Code: Python, JavaScript, FastAPI, Express, React, Fast.ai, Docker.
+AI/ML: Fast.ai, PyTorch, Hugging Face, Ollama, RAG.
+Data Science: NumPy, pandas, JupyterLab, SQL.
+Digital Marketing: Google Analytics, HubSpot, SFDC, Notion.
+Volunteer: Suicide hotline, SF Animal Care & Control (dog walker), Red Cross (100x blood donor).
+Interests: Running (barefoot marathoner, author, coach), chess (US age-group Top 50), climbing: indoor bouldering.
+
+
+
+
+EDUCATION 
+	
+Yale School of Management, New Haven, Connecticut 	 		                     	       	           		    MBA
+UC Berkeley, Berkeley, California			                                      BA Mathematics, Computer Science minor
+
+AWS, DeepLearning.AI: Certificate in Generative AI with Large Language Models, July 2024
+Google Cloud Training: Machine Learning Engineer Professional Certificate (in progress)
+
+
+—--
+
+Sun Microsystems
+Product Manager for calendaring
+Product Manager for Java Desktop System
+Partnerships Manager for Java Desktop System
+
+
+Hyperion Solutions:
+Product Manager for Hyperion Web Gateway, 
+Product Manager for Hyperion Spider-Man Web Application
+
+iPass:
+Product Manager
+
+TRW Financial systems
+Systems Analyst (DevOps)
+Software Engineer (C programmer) for European banking clients
+
+
+TURN:
+Software developer (C, PostScript) for fitness-tracking application.
+
+
+
+Presentation skills:
+Presenter at the Hyperion Annual Conference
+Moderated panel at OpenStack summit
+Moderator of the Berkeley Extension Program Director’s roundtable
+Toastmaster trained
+
+
+Data analysis:
+Degree in mathematics
+Extensive experience managing software products, partner programs, and educations programs on metrics and KPIs.
+At Berkeley, managed program design and growth based on data from current student and course performance as well as Google Analytics search data.
+
+Financial analysis:
+Responsible for managing the financial success of several UC Berkeley Extension programs, in Accounting, Paralegal Studies, Certified Financial Planning, Economics, Business Administration.
+All programs did well; Accounting was a particularly memorable success
+
+
+Entrepreneurship:
+At Berkeley Extension, spearheaded a web initiative, including building the website, to target the home-schooling market.
+Attended ASU-GSV conference and sourced several online partnership deals between Berkeley and global education providers.
+
+Marketing:
+Named the Appsembler Tahoe product!
+Wrote several white papers - e.g. at Leadspace, FirstRain, Sun Microsystems, Bain
+Wrote many blog posts on various topics in technology
+Responsible for content creation at Leadspace, managing vendors, designing and creating infographics.
+
+People management:
+Managed (hired, evaluated, coached) 40+ instructors at Berkeley Extension
+Managed sales engineering team at Leadspace
+Managed outside vendors at Sun Microsystems, at Hyperion, at AMD.
+Excellent at identifying the best in people. Believe that everyone has strengths, and at least part of the work
+should involve using their greatest strengths and expertise
+
+
+
+Praise:
+- Praised for always bringing energy and enthusiasm into the workplace.
+- Often recognized for taking the initiative and finding new solutions to problems.
+- A very strong generalist, with expertise in different areas and different cultures, very skilled
+at bridging gaps.
+- One interviewee told Ashish: "you are a joy to talk to"
+- Women in the department at Berkeley told ashish: "you are one of the good guys," i.e.
+who supports their equality.
+- client assessment at Stanford GSB: “You’re fun and fun to work with!”
+
+
