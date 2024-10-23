@@ -35,19 +35,19 @@ body, html {
 .sidebar-logo {
     display: block;
     width: 100%;
-    padding-bottom: 100%; /* This maintains the square aspect ratio */
+    padding-bottom: 100%;
     margin-bottom: 20px;
     border-radius: 5px;
-    background-size: 60%; /* This shrinks the logo by 40% */
+    background-size: 60%;
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease; /* Add smooth transition for hover effects */
+    transition: all 0.3s ease;
 }
 
 .sidebar-logo:hover {
-    transform: scale(1.05); /* Slightly increase size on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .youtube-logo {
@@ -55,7 +55,7 @@ body, html {
 }
 
 .youtube-logo:hover {
-    background-color: rgba(255, 0, 0, 0.1); /* Slight red tint for YouTube */
+    background-color: rgba(255, 0, 0, 0.1);
 }
 
 .linkedin-logo {
@@ -63,7 +63,7 @@ body, html {
 }
 
 .linkedin-logo:hover {
-    background-color: rgba(0, 119, 181, 0.1); /* Slight blue tint for LinkedIn */
+    background-color: rgba(0, 119, 181, 0.1);
 }
 
 .resume-logo {
@@ -71,9 +71,8 @@ body, html {
 }
 
 .resume-logo:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Slight dark tint for resume */
+    background-color: rgba(0, 0, 0, 0.1);
 }
-
 
 .sidebar-button {
     display: block;
@@ -121,8 +120,9 @@ body, html {
     background-color: white;
     border-radius: 5px;
     border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
 }
-
 
 .message {
     max-width: 70%;
@@ -135,19 +135,20 @@ body, html {
 .bot-message {
     background-color: #f0f0f0;
     align-self: flex-start;
+    margin-right: auto;
 }
 
 .user-message {
     background-color: #007bff;
     color: white;
     align-self: flex-end;
+    margin-left: auto;
     text-align: right;
 }
 
-
 .input-area {
     display: flex;
-    margin-top: 10px; /* Added margin to separate from chat messages */
+    margin-top: 10px;
 }
 
 #user-input {
@@ -165,5 +166,3 @@ body, html {
     border-radius: 0 5px 5px 0;
     cursor: pointer;
 }
-
-

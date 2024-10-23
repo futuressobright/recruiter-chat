@@ -97,7 +97,7 @@ Interests: Running (barefoot marathoner, author, coach), chess (US age-group Top
 EDUCATION 
 	
 Yale School of Management, New Haven, Connecticut 	 		                     	       	           		    MBA
-UC Berkeley, Berkeley, California			                                      BA Mathematics, Computer Science minor
+UC Berkeley, Berkeley, California (Regent's Scholar, chess team)	                                      BA Mathematics, Computer Science minor
 
 AWS, DeepLearning.AI: Certificate in Generative AI with Large Language Models, July 2024
 Google Cloud Training: Machine Learning Engineer Professional Certificate (in progress)
