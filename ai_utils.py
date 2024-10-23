@@ -13,11 +13,14 @@ if not client.api_key:
 def get_answer_from_openai(question, context, is_initial_greeting=False):
     try:
         if is_initial_greeting:
-            system_content = "You are an AI assistant for a recruiter. Start with a brief, friendly greeting and ask how you can help. Use the provided context for information if needed."
+            system_content = """You are an AI assistant for a recruiter. Provide a brief, one-sentence greeting 
+            and ask how you can help with the recruitment process."""
             user_content = "Start the conversation"
         else:
-            system_content = "You are a helpful assistant answering questions based on the given context."
-            user_content = f"Context: {context}\n\nQuestion: {question}\n\nAnswer:"
+            system_content = """You are a helpful assistant answering questions about an impressive job candidate. 
+            Keep responses clear and concise, ideally 2-3 sentences. Focus on the most relevant information 
+            from the context. Never leave sentences incomplete."""
+            user_content = f"Context: {context}\n\nQuestion: {question}\n\nProvide a brief, complete answer:"
 
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -25,7 +28,9 @@ def get_answer_from_openai(question, context, is_initial_greeting=False):
                 {"role": "system", "content": system_content},
                 {"role": "user", "content": user_content}
             ],
-            max_tokens=150
+            max_tokens=150,
+            temperature=0.7,
+            presence_penalty=0.6  # Encourages more concise, focused responses
         )
         return response.choices[0].message.content.strip()
     except Exception as e:

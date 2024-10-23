@@ -145,22 +145,19 @@ Responsible for managing the financial success of several UC Berkeley Extension 
 All programs did well; Accounting was a particularly memorable success
 
 
-Entrepreneurship:
-At Berkeley Extension, spearheaded a web initiative, including building the website, to target the home-schooling market.
-Attended ASU-GSV conference and sourced several online partnership deals between Berkeley and global education providers.
-
 Marketing:
-Named the Appsembler Tahoe product!
-Wrote several white papers - e.g. at Leadspace, FirstRain, Sun Microsystems, Bain
-Wrote many blog posts on various topics in technology
-Responsible for content creation at Leadspace, managing vendors, designing and creating infographics.
+- Named the Appsembler Tahoe product!
+- Wrote several white papers - e.g. at Leadspace, FirstRain, Sun Microsystems, Bain
+- Wrote many blog posts on various topics in technology
+- Responsible for content creation at Leadspace, managing vendors, designing and creating infographics.
+- He is a skilled writer, and a published author, always striving to balance clarity and conciseness, appropriate to the needs of the audience.
+
 
 People management:
-Managed (hired, evaluated, coached) 40+ instructors at Berkeley Extension
-Managed sales engineering team at Leadspace
-Managed outside vendors at Sun Microsystems, at Hyperion, at AMD.
-Excellent at identifying the best in people. Believe that everyone has strengths, and at least part of the work
-should involve using their greatest strengths and expertise
+- Managed (hired, evaluated, coached) 40+ instructors at Berkeley Extension
+- Managed sales engineering team at Leadspace
+- Managed outside vendors at Sun Microsystems, at Hyperion, at AMD.
+- Excellent at identifying the best in people. Believe that everyone has strengths, and at least part of the work should involve using their greatest strengths and expertise
 
 
 
@@ -175,3 +172,17 @@ who supports their equality.
 - client assessment at Stanford GSB: “You’re fun and fun to work with!”
 
 
+Finance:
+- Ashish successfully passed the CFA Level 1 exams.
+- At Yale, he studied Corporate Finance with Ken French, who co-developed the Fama–French three-factor model to describe stock returns.
+- At Berkeley, Midokura, Leadspace, and elsewhere, he designed and negotiated contracts based on extensive financial (revenue, profit) modeling.
+-
+
+
+Entrepreneurship:
+- And has run his own small publishing company.
+- Co-founded a startup
+- At Berkeley Extension, spearheaded a web initiative, including building the website, to target the home-schooling market.
+- Attended ASU-GSV conference and sourced several online partnership deals between Berkeley and global education providers.
+
+Technical skills.
