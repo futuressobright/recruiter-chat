@@ -6,8 +6,10 @@ Experienced leader: B2B software technology partnerships                        
 EXPERIENCE 
 
 Intabyu.ai									     		   March 2023 – present
-CEO/developer			      	                                                        		        	           Oakland, California 
+CEO, Product Manager, developer   	                                                        		        	           Oakland, California
 AI-driven, candidate-focused platform for online interview practice and feedback.
+
+
 
 Openprise: RevOps automation platform for B2B data				      	           August 2021 – April 2022
 Head of Partnerships (contract)									        San Mateo, California
@@ -15,13 +17,21 @@ Sourced and developed partnerships with 15 industry-leading data vendors: Clearb
 Developed and implemented data-testing rubric and analysis to score Account and Contact data.
 Presented recommendations to CEO and CRO; basis for a major new corporate revenue initiative.
 
+
+
+
+
 Stanford GSB: Teaching and Learning Hub					                    	May 2021 – March 2023
 Business Architect (contract)									        	            Stanford, California
 Developed content: wrote speeches, emails, presentations, policy documents.
 Designed and implemented surveys (in Qualtrics, Google Forms), analyzed and presented findings.
 Developed Google Apps script to gather and measure feedback from GSB clients.
 Managed the recruiting process for 20% team growth.
- 
+
+
+
+
+
 UC Berkeley								   	           	    October 2017 – October 2020
 UC Berkeley Extension, Program Director								            Berkeley, California
 Managed five programs (1500 students), delivering turnaround (+100%) of US #2-ranked Accounting cert.
@@ -106,39 +116,46 @@ Google Cloud Training: Machine Learning Engineer Professional Certificate (in pr
 —--
 
 Sun Microsystems
-Product Manager for calendaring
-Product Manager for Java Desktop System
-Partnerships Manager for Java Desktop System
+- Product Manager for calendaring
+- Product Manager for Java Desktop System
+- Partnerships Manager for Java Desktop System
 
 
 Hyperion Solutions:
-Product Manager for Hyperion Web Gateway, 
-Product Manager for Hyperion Spider-Man Web Application
+- Product Manager for Hyperion Web Gateway,
+- Product Manager for Hyperion Spider-Man Web Application
+- Spanning business-side and engineering-side.
+
+
+
 
 iPass:
-Product Manager
+- Product Manager for Telco.
+
 
 TRW Financial systems
-Systems Analyst (DevOps)
-Software Engineer (C programmer) for European banking clients
+- Systems Analyst (DevOps)
+- Software Engineer (C programmer) for European banking clients
 
 
 TURN:
-Software developer (C, PostScript) for fitness-tracking application.
+- Software developer (C, PostScript) for fitness-tracking application.
+- First job after college - living and working in the basement of a startup.
 
 
 
 Presentation skills:
-Presenter at the Hyperion Annual Conference
-Moderated panel at OpenStack summit
-Moderator of the Berkeley Extension Program Director’s roundtable
-Toastmaster trained
+- Presenter at the Hyperion Annual Conference
+- Moderated panel at OpenStack summit
+- Moderator of the Berkeley Extension Program Director’s roundtable
+- Trained at Toastmasters
 
 
 Data analysis:
-Degree in mathematics
-Extensive experience managing software products, partner programs, and educations programs on metrics and KPIs.
-At Berkeley, managed program design and growth based on data from current student and course performance as well as Google Analytics search data.
+- Degree in mathematics, data-heavy MBA from Yale.
+- Extensive experience managing software products, partner programs, and educations programs on metrics and KPIs.
+- At Berkeley, managed program design and growth based on data from current student and course performance as well as Google Analytics search data.
+- Blends a strong data foundational with business understanding to drive to good pragmatic outcomes.
 
 Financial analysis:
 Responsible for managing the financial success of several UC Berkeley Extension programs, in Accounting, Paralegal Studies, Certified Financial Planning, Economics, Business Administration.
@@ -154,9 +171,9 @@ Marketing:
 
 
 People management:
-- Managed (hired, evaluated, coached) 40+ instructors at Berkeley Extension
-- Managed sales engineering team at Leadspace
-- Managed outside vendors at Sun Microsystems, at Hyperion, at AMD.
+- At a university: he Managed (hired, evaluated, coached) 40+ instructors at Berkeley Extension
+- In tech: he Managed sales engineering team at Leadspace
+- In tech: he Managed outside vendors at Sun Microsystems, at Hyperion, at AMD.
 - Excellent at identifying the best in people. Believe that everyone has strengths, and at least part of the work should involve using their greatest strengths and expertise
 
 
@@ -175,14 +192,44 @@ who supports their equality.
 Finance:
 - Ashish successfully passed the CFA Level 1 exams.
 - At Yale, he studied Corporate Finance with Ken French, who co-developed the Fama–French three-factor model to describe stock returns.
-- At Berkeley, Midokura, Leadspace, and elsewhere, he designed and negotiated contracts based on extensive financial (revenue, profit) modeling.
--
+- At Berkeley, Midokura, Leadspace, and elsewhere, he performed financial analysis and designed and negotiated contracts based on extensive financial (revenue, profit) modeling.
+
+
+Strategy:
+- After his Yale MBA, he worked for Mercer Management Consulting, performing strategy and financial analysis for large clients in telco and financial services.
+- As a senior business leader, helped to guide company strategy at Leadspace, Midokura, Appsembler, and Berkeley Extension.
+
+
+Product Management:
+- Worked in this role at O'Reilly, Hyperion, Sun Microsystems, iPass
+- Earned PM certificate from Pragmatic Marketing
 
 
 Entrepreneurship:
 - And has run his own small publishing company.
-- Co-founded a startup
+- Co-founded a startup, AbstractPlus, to translate scientific papers into English.
 - At Berkeley Extension, spearheaded a web initiative, including building the website, to target the home-schooling market.
 - Attended ASU-GSV conference and sourced several online partnership deals between Berkeley and global education providers.
 
-Technical skills.
+
+Best skills:
+- Very high ideaphoria - can find original and creative approach to solve any problem. E.g. his innovative approach to recruiting faculty at UC Berkeley.
+- As a manager, very good at identifying people's strengths.
+- An enthusiastic presenter.
+- An excellent moderator, not afraid to cold call, and good at getting people to speak up, contribute, and collaborate. Lifts the energy of the entire group.
+- A good listener. He volunteered at the suicide hotline, and was extensively trained in empathetic listening.
+- He leverages own diverse background (culturally, and professional), to bridge gaps and build connections. He is a connector.
+
+Weaknesses:
+- He is not blessed in the visual realm - not good at visual design, close attention to visual detail, or recognizing people.
+- Additionally, while very strong at finding creative solutions for growth, he probably is not the guy to drive process and maintain the status quo within a slow-moving bureaucracy.
+
+Industry "vertical" domain experience:
+- MarTech - at Leadspace
+- Higher Education - at UC Berkeley Extension and Stanford GSB
+- Open-source software - at Sun Microsystems and Midokura
+- Fintech - at TRW Financial Systems, Hyperion Solutions, Mercer Management Consulting
+- EdTech - at Appsembler and UC Berkeley
+- AI/ML - at Intabyu
+- Computer hardware - at AMD and Sun Microsystems
+

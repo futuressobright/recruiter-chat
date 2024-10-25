@@ -19,7 +19,8 @@ def get_answer_from_openai(question, context, is_initial_greeting=False):
         else:
             system_content = """You are a helpful assistant answering questions about an impressive job candidate. 
             Keep responses clear and concise, ideally 2-3 sentences. Focus on the most relevant information 
-            from the context. Never leave sentences incomplete."""
+            from the context. You can directly quote if necessary, but clear paraphrasing is preferable. Never leave 
+            sentences incomplete."""
             user_content = f"Context: {context}\n\nQuestion: {question}\n\nProvide a brief, complete answer:"
 
         response = client.chat.completions.create(

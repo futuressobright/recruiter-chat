@@ -51,7 +51,7 @@ body, html {
 }
 
 .youtube-logo {
-    background-image: url('/static/images/youtube_logo4.jpg');
+    background-image: url('/static/assets/youtube_logo4.jpg');
 }
 
 .youtube-logo:hover {
@@ -59,7 +59,7 @@ body, html {
 }
 
 .linkedin-logo {
-    background-image: url('/static/images/linkedin_logo2.png');
+    background-image: url('/static/assets/linkedin_logo2.png');
 }
 
 .linkedin-logo:hover {
@@ -67,7 +67,7 @@ body, html {
 }
 
 .resume-logo {
-    background-image: url('/static/images/resume_signpost.jpeg');
+    background-image: url('/static/assets/resume_signpost.jpeg');
 }
 
 .resume-logo:hover {

@@ -51,11 +51,11 @@ db = Database()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Configuration
-UPLOAD_FOLDER = 'images'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+UPLOADS_DIR = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOADS_DIR
 
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+if not os.path.exists(UPLOADS_DIR):
+    os.makedirs(UPLOADS_DIR)
 
 DEFAULT_COLOR_SCHEME = {
     'dominant_color': '#000080',  # Navy blue
@@ -123,12 +123,12 @@ def chat_session(session_id):
 
     try:
         background_image = os.path.basename(config['company_logo'])
-        background_image_url = url_for('static', filename=f'images/{background_image}')
-        image_path = os.path.join(app.static_folder, 'images', background_image)
+        background_image_url = url_for('static', filename=f'uploads/{background_image}')
+        image_path = os.path.join(app.static_folder, 'uploads', background_image)
         color_scheme = get_color_scheme(image_path)
     except (ValueError, FileNotFoundError) as e:
         print(f"Error processing background image: {str(e)}")
-        background_image_url = url_for('static', filename='images/default_background.png')
+        background_image_url = url_for('static', filename='uploads/default_background.png')
         color_scheme = DEFAULT_COLOR_SCHEME
 
     return render_template('chat.html',
@@ -142,7 +142,7 @@ def chat_session(session_id):
                            initial_greeting=initial_greeting)
 
 
-@app.route('/images/<filename>')
+@app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
