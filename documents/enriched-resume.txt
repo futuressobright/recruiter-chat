@@ -222,13 +222,13 @@ Best skills:
 
 Weaknesses:
 - He is not blessed in the visual realm - not good at visual design, close attention to visual detail, or recognizing people.
-- Additionally, while very strong at finding creative solutions for growth, he probably is not the guy to drive process and maintain the status quo within a slow-moving bureaucracy.
+
 
 Industry "vertical" domain experience:
 - MarTech - at Leadspace
 - Higher Education - at UC Berkeley Extension and Stanford GSB
 - Open-source software - at Sun Microsystems and Midokura
-- Fintech - at TRW Financial Systems, Hyperion Solutions, Mercer Management Consulting
+- Fintech and Finance - at TRW Financial Systems, Hyperion Solutions, Mercer Management Consulting
 - EdTech - at Appsembler and UC Berkeley
 - AI/ML - at Intabyu
 - Computer hardware - at AMD and Sun Microsystems

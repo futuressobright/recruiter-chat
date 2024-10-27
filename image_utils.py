@@ -4,6 +4,7 @@ import shutil
 from colorthief import ColorThief
 from PIL import Image
 import imghdr
+from path_config import PathConfig
 
 # Constants
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
@@ -61,8 +62,9 @@ def get_background_image(config_file='config.json'):
             config = json.load(f)
             if 'background_image' in config:
                 try:
-                    validate_image(config['background_image'])
-                    return config['background_image']
+                    image_path = PathConfig.get_upload_path(config['background_image'])
+                    validate_image(image_path)
+                    return image_path
                 except ValueError:
                     print("Stored image file is invalid. Please provide a new image.")
 
@@ -77,8 +79,9 @@ def get_background_image(config_file='config.json'):
         except ValueError as e:
             print(f"Error: {str(e)}")
 
+    filename = os.path.basename(image_path)
     with open(config_file, 'w') as f:
-        json.dump({'background_image': image_path}, f)
+        json.dump({'background_image': filename}, f)
 
     return image_path
 
@@ -102,6 +105,6 @@ def setup_background_image(app, image_path, opacity=0.5):
     # Modify this function to use reduce_image_intensity
     reduced_image_path = reduce_image_intensity(image_path, opacity)
     filename = os.path.basename(reduced_image_path)
-    destination = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    destination = PathConfig.get_upload_path(filename)
     os.rename(reduced_image_path, destination)
     return filename

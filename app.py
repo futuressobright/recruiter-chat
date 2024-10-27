@@ -9,11 +9,13 @@ from database import Database
 from logger import log_session, log_interaction, configure_logging
 from image_utils import get_background_image, get_color_scheme, setup_background_image, validate_image
 from ai_utils import get_answer_from_openai, get_initial_greeting
+from path_config import PathConfig  # Add this import
+
 
 load_dotenv()
-
 # Configure logging
 configure_logging(os.getenv("LOGTAIL_SOURCE_TOKEN"))
+
 
 class SessionManager:
     def __init__(self, employer_name):
@@ -51,11 +53,10 @@ db = Database()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Configuration
-UPLOADS_DIR = 'static/uploads'
-app.config['UPLOAD_FOLDER'] = UPLOADS_DIR
+app.config['UPLOAD_FOLDER'] = PathConfig.UPLOADS_DIR
 
-if not os.path.exists(UPLOADS_DIR):
-    os.makedirs(UPLOADS_DIR)
+if not os.path.exists(PathConfig.UPLOADS_DIR):
+    os.makedirs(PathConfig.UPLOADS_DIR)
 
 DEFAULT_COLOR_SCHEME = {
     'dominant_color': '#000080',  # Navy blue
@@ -123,12 +124,12 @@ def chat_session(session_id):
 
     try:
         background_image = os.path.basename(config['company_logo'])
-        background_image_url = url_for('static', filename=f'uploads/{background_image}')
-        image_path = os.path.join(app.static_folder, 'uploads', background_image)
+        background_image_url = url_for('static', filename=PathConfig.get_static_url(background_image))
+        image_path = PathConfig.get_full_path(background_image)
         color_scheme = get_color_scheme(image_path)
     except (ValueError, FileNotFoundError) as e:
         print(f"Error processing background image: {str(e)}")
-        background_image_url = url_for('static', filename='uploads/default_background.png')
+        background_image_url = url_for('static', filename=PathConfig.get_static_url('default_background.png'))
         color_scheme = DEFAULT_COLOR_SCHEME
 
     return render_template('chat.html',

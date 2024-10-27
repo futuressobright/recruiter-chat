@@ -5,6 +5,8 @@ import requests
 from PIL import Image
 import io
 import shutil
+from path_config import PathConfig  # Add this import
+
 
 
 def is_valid_url(url):
@@ -85,7 +87,7 @@ def setup_config():
 
 
 def setup_company_logo():
-    os.makedirs('static/uploads', exist_ok=True)
+    os.makedirs(PathConfig.UPLOADS_DIR, exist_ok=True)
 
     try:
         with open('config.json', 'r') as f:
@@ -110,7 +112,7 @@ def setup_company_logo():
                     extension = '.png'  # default to png if content-type is unclear
 
                 file_name = f"{employer_name}_logo{extension}"
-                save_path = os.path.join('static', 'uploads', file_name)
+                save_path = PathConfig.get_upload_path(file_name)
                 downloaded_path = download_image(logo_input, save_path)
             elif os.path.exists(logo_input):
                 extension = os.path.splitext(logo_input)[1].lower()
@@ -118,7 +120,7 @@ def setup_company_logo():
                     raise ValueError("Only PNG and JPEG formats are supported")
 
                 file_name = f"{employer_name}_logo{extension}"
-                save_path = os.path.join('static', 'uploads', file_name)
+                save_path = PathConfig.get_upload_path(file_name)
                 validate_image(logo_input)
                 if os.path.abspath(logo_input) != os.path.abspath(save_path):
                     shutil.copy2(logo_input, save_path)
