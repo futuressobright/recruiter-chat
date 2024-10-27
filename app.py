@@ -13,10 +13,52 @@ from ai_utils import get_answer_from_openai, get_initial_greeting
 from path_config import PathConfig
 import logging
 
-# Setup error logging
+# Load environment variables
+load_dotenv()
+
+# Validate required environment variables
+api_key = os.getenv('OPENAI_API_KEY')
+if not api_key:
+    raise ValueError("OPENAI_API_KEY must be set")
+
+logtail_token = os.getenv('LOGTAIL_SOURCE_TOKEN')
+if not logtail_token:
+    raise ValueError("LOGTAIL_SOURCE_TOKEN must be set")
+
+# Set up other environment variables with defaults
+documents_dir = os.getenv('DOCUMENTS_DIR', './documents')
+port = int(os.getenv('PORT', '8080'))
+
+# Create documents directory if it doesn't exist
+if not os.path.exists(documents_dir):
+    os.makedirs(documents_dir)
+
+# Initialize Flask app
+app = Flask(__name__, static_url_path='/static')
+
+# Setup logging
+configure_logging(logtail_token)
 logger = logging.getLogger(__name__)
 
+# Initialize OpenAI client
+client = OpenAI(api_key=api_key)
 
+# Initialize Database
+db = Database()
+
+# Configuration
+app.config['UPLOAD_FOLDER'] = PathConfig.UPLOADS_DIR
+
+if not os.path.exists(PathConfig.UPLOADS_DIR):
+    os.makedirs(PathConfig.UPLOADS_DIR)
+
+DEFAULT_COLOR_SCHEME = {
+    'dominant_color': '#007bff',
+    'palette': ['#007bff', '#FFFFFF', '#f0f0f0', '#e0e0e0']
+}
+
+
+# Error handling classes
 class ChatError(Exception):
     """Base exception class for chat application errors"""
 
@@ -33,13 +75,7 @@ class SessionNotFoundError(ChatError):
         super().__init__(f"Session not found: {session_id}", status_code=404)
 
 
-class ConfigurationError(ChatError):
-    """Raised when there's an error with configuration"""
-
-    def __init__(self, message):
-        super().__init__(f"Configuration error: {message}", status_code=500)
-
-
+# Session management
 class SessionManager:
     def __init__(self, employer_name):
         self.sessions = {}
@@ -71,30 +107,6 @@ class SessionManager:
             self.sessions[session_id]['chat_history'] = []
 
 
-load_dotenv()
-configure_logging(os.getenv("LOGTAIL_SOURCE_TOKEN"))
-
-app = Flask(__name__, static_url_path='/static')
-db = Database()
-
-# Validate OpenAI API key at startup
-api_key = os.getenv("OPENAI_API_KEY")
-if not api_key:
-    raise ConfigurationError("OPENAI_API_KEY environment variable is not set")
-client = OpenAI(api_key=api_key)
-
-# Configuration
-app.config['UPLOAD_FOLDER'] = PathConfig.UPLOADS_DIR
-
-if not os.path.exists(PathConfig.UPLOADS_DIR):
-    os.makedirs(PathConfig.UPLOADS_DIR)
-
-DEFAULT_COLOR_SCHEME = {
-    'dominant_color': '#007bff',
-    'palette': ['#007bff', '#FFFFFF', '#f0f0f0', '#e0e0e0']
-}
-
-
 def load_config():
     default_config = {
         'employer_name': 'default',
@@ -108,7 +120,8 @@ def load_config():
         logger.warning("config.json not found, using default configuration")
         return default_config
     except json.JSONDecodeError as e:
-        raise ConfigurationError(f"Invalid JSON in config.json: {str(e)}")
+        logger.error(f"Invalid JSON in config.json: {str(e)}")
+        return default_config
 
 
 def load_candidate_info():
@@ -126,17 +139,14 @@ def load_candidate_info():
         logger.warning("candidate_info.json not found, using default candidate info")
         return default_candidate
     except json.JSONDecodeError as e:
-        raise ConfigurationError(f"Invalid JSON in candidate_info.json: {str(e)}")
+        logger.error(f"Invalid JSON in candidate_info.json: {str(e)}")
+        return default_candidate
 
 
-# Load configuration at startup
-try:
-    config = load_config()
-    candidate_info = load_candidate_info()
-    session_manager = SessionManager(config['employer_name'])
-except Exception as e:
-    logger.error(f"Failed to initialize application: {str(e)}")
-    raise
+# Load configurations
+config = load_config()
+candidate_info = load_candidate_info()
+session_manager = SessionManager(config['employer_name'])
 
 
 @app.errorhandler(ChatError)
@@ -244,6 +254,5 @@ def chat():
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
     print(f"Starting application on port {port}")
     app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)
