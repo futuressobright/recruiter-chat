@@ -1,110 +1,23 @@
-import os
-import json
-import shutil
-from colorthief import ColorThief
-from PIL import Image
-import imghdr
-from path_config import PathConfig
-
-# Constants
-MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp'}
-
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-def reduce_image_intensity(image_path, opacity=0.8):
-    with Image.open(image_path) as img:
-        if img.mode != 'RGBA':
-            img = img.convert('RGBA')
-
-        # Create a white background
-        background = Image.new('RGBA', img.size, (255, 255, 255, 255))
-
-        # Blend the original image with the white background
-        img = Image.blend(background, img, opacity)
-
-        # Save the modified image
-        output_path = f"{os.path.splitext(image_path)[0]}_reduced.png"
-        img.save(output_path, 'PNG')
-
-    return output_path
-
-
-def validate_image(image_path):
-    if not os.path.exists(image_path):
-        raise ValueError("File does not exist")
-
-    if not allowed_file(image_path):
-        raise ValueError("File type not allowed. Please use .jpg, .jpeg, .png, .gif, or .bmp")
-
-    if os.path.getsize(image_path) > MAX_FILE_SIZE:
-        raise ValueError(f"File size exceeds the maximum limit of {MAX_FILE_SIZE // (1024 * 1024)}MB")
-
-    # Verify that the file is actually an image
-    if imghdr.what(image_path) not in ALLOWED_EXTENSIONS:
-        raise ValueError("File is not a valid image")
-
-    # Check image dimensions and color depth
-    with Image.open(image_path) as img:
-        width, height = img.size
-        if width < 800 or height < 600:
-            print(f"Warning: Image dimensions ({width}x{height}) are below recommended size of 800x600")
-        if img.mode not in ('RGB', 'RGBA'):
-            print(f"Warning: Image color mode ({img.mode}) may result in suboptimal color extraction")
-
-
-def get_background_image(config_file='config.json'):
-    if os.path.exists(config_file):
-        with open(config_file, 'r') as f:
-            config = json.load(f)
-            if 'background_image' in config:
-                try:
-                    image_path = PathConfig.get_upload_path(config['background_image'])
-                    validate_image(image_path)
-                    return image_path
-                except ValueError:
-                    print("Stored image file is invalid. Please provide a new image.")
-
-    while True:
-        print("Please provide the path to the background image file:")
-        print("(Accepted formats: .jpg, .jpeg, .png, .gif, .bmp, max size: 5MB)")
-        image_path = input().strip()
-
-        try:
-            validate_image(image_path)
-            break
-        except ValueError as e:
-            print(f"Error: {str(e)}")
-
-    filename = os.path.basename(image_path)
-    with open(config_file, 'w') as f:
-        json.dump({'background_image': filename}, f)
-
-    return image_path
-
-
 def get_color_scheme(image_path):
-    color_thief = ColorThief(image_path)
-    dominant_color = color_thief.get_color(quality=1)
-    palette = color_thief.get_palette(color_count=5, quality=1)
-
-    # Convert RGB to hex
-    dominant_color_hex = '#{:02x}{:02x}{:02x}'.format(*dominant_color)
-    palette_hex = ['#{:02x}{:02x}{:02x}'.format(*color) for color in palette]
-
+    """Return a simple fixed color scheme, since we're using standard colors in CSS"""
     return {
-        'dominant_color': dominant_color_hex,
-        'palette': palette_hex
+        'dominant_color': '#007bff',  # The blue we're already using in CSS
+        'palette': ['#007bff', '#FFFFFF', '#f0f0f0', '#e0e0e0']  # Other colors from our CSS
     }
 
+def validate_image(image_path):
+    """Validate that the image file exists and is accessible"""
+    if not os.path.exists(image_path):
+        raise ValueError(f"Image not found at {image_path}")
+    return True
 
-def setup_background_image(app, image_path, opacity=0.5):
-    # Modify this function to use reduce_image_intensity
-    reduced_image_path = reduce_image_intensity(image_path, opacity)
-    filename = os.path.basename(reduced_image_path)
-    destination = PathConfig.get_upload_path(filename)
-    os.rename(reduced_image_path, destination)
-    return filename
+def get_background_image(config):
+    """Get the background image path from config"""
+    return config.get('company_logo', 'default_background.png')
+
+def setup_background_image(app, image_path):
+    """Setup the background image in the Flask app"""
+    if validate_image(image_path):
+        app.config['BACKGROUND_IMAGE'] = image_path
+        return True
+    return False

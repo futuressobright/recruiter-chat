@@ -1,0 +1,140 @@
+(venv) [recruiter_chat] % python app.py        
+Loading cached data...
+No documents changed, using cached embeddings
+Starting application on port 8080
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.4.28:8080
+Press CTRL+C to quit
+
+Profile for home:
+         410 function calls (389 primitive calls) in 0.002 seconds
+
+   Ordered by: cumulative time
+   List reduced from 182 to 50 due to restriction <50>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.002    0.002 /Users/ashish/Dropbox/programming/recruiter_chat/app.py:111(home)
+        1    0.000    0.000    0.002    0.002 /Users/ashish/Dropbox/programming/recruiter_chat/app.py:49(create_session)
+        1    0.000    0.000    0.002    0.002 /Users/ashish/Dropbox/programming/recruiter_chat/logger.py:62(log_session)
+        1    0.000    0.000    0.001    0.001 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/logging/__init__.py:1479(info)
+        1    0.000    0.000    0.001    0.001 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/logging/__init__.py:1610(_log)
+        1    0.000    0.000    0.001    0.001 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/logging/__init__.py:1636(handle)
+        1    0.000    0.000    0.001    0.001 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/logging/__init__.py:1690(callHandlers)
+        1    0.000    0.000    0.001    0.001 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/logging/__init__.py:965(handle)
+        1    0.000    0.000    0.001    0.001 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/logtail/handler.py:62(emit)
+        1    0.000    0.000    0.001    0.001 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/logging/__init__.py:942(format)
+        1    0.000    0.000    0.001    0.001 /Users/ashish/Dropbox/programming/recruiter_chat/logger.py:10(format)
+        8    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        1    0.000    0.000    0.000    0.000 {built-in method utcnow}
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/logtail/frame.py:8(create_frame)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/logtail/handler.py:49(ensure_flush_thread_alive)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/threading.py:945(start)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/flask/helpers.py:230(redirect)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/flask/sansio/app.py:893(redirect)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/werkzeug/utils.py:242(redirect)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/logtail/frame.py:86(_relative_to_main_module_if_possible)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/logtail/frame.py:90(_relative_to_main_module)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/flask/helpers.py:176(url_for)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/threading.py:611(wait)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/flask/app.py:966(url_for)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/threading.py:295(wait)
+        2    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/json/__init__.py:183(dumps)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/werkzeug/wrappers/response.py:144(__init__)
+        5    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.lock' objects}
+        2    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/json/encoder.py:183(encode)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/logging/__init__.py:1595(makeRecord)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/werkzeug/routing/map.py:828(build)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/app.py:41(generate_unique_id)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/logging/__init__.py:292(__init__)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/werkzeug/sansio/response.py:111(__init__)
+        2    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/json/encoder.py:205(iterencode)
+        1    0.000    0.000    0.000    0.000 <frozen posixpath>:486(relpath)
+        1    0.000    0.000    0.000    0.000 <frozen posixpath>:150(dirname)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/logtail/flusher.py:13(__init__)
+      2/1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/werkzeug/routing/map.py:787(_partial_build)
+     21/1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/logtail/frame.py:60(_remove_circular_dependencies)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/json/__init__.py:299(loads)
+        3    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/werkzeug/datastructures/headers.py:372(__setitem__)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/json/decoder.py:332(decode)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/werkzeug/utils.py:95(__get__)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/threading.py:856(__init__)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/queue.py:122(put)
+        1    0.000    0.000    0.000    0.000 {built-in method _thread.start_new_thread}
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/werkzeug/routing/rules.py:840(build)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/logging/__init__.py:1561(findCaller)
+        1    0.000    0.000    0.000    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/werkzeug/sansio/request.py:465(user_agent)
+
+
+127.0.0.1 - - [27/Oct/2024 00:30:11] "GET / HTTP/1.1" 302 -
+
+
+Profile for chat_session:
+         149554277 function calls (149549634 primitive calls) in 55.147 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1529 to 50 due to restriction <50>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   55.148   55.148 /Users/ashish/Dropbox/programming/recruiter_chat/app.py:117(chat_session)
+        1    0.168    0.168   54.595   54.595 /Users/ashish/Dropbox/programming/recruiter_chat/image_utils.py:89(get_color_scheme)
+        2    6.957    3.479   54.250   27.125 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:53(get_palette)
+        2    0.000    0.000   46.450   23.225 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:208(quantize)
+        2   15.704    7.852   30.692   15.346 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:109(vbox_from_pixels)
+        1    0.157    0.157   27.318   27.318 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:41(get_color)
+        2   11.150    5.575   15.678    7.839 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:95(get_histo)
+ 49766537    7.612    0.000    7.612    0.000 {built-in method builtins.max}
+ 49766651    7.376    0.000    7.376    0.000 {built-in method builtins.min}
+ 16687808    3.600    0.000    3.600    0.000 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:91(get_color_index)
+ 16588817    0.953    0.000    0.953    0.000 {method 'setdefault' of 'dict' objects}
+ 16590543    0.791    0.000    0.791    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.544    0.544 /Users/ashish/Dropbox/programming/recruiter_chat/ai_utils.py:41(get_initial_greeting)
+        1    0.000    0.000    0.544    0.544 /Users/ashish/Dropbox/programming/recruiter_chat/timing_utils.py:11(wrapper)
+        1    0.000    0.000    0.544    0.544 /Users/ashish/Dropbox/programming/recruiter_chat/ai_utils.py:12(get_answer_from_openai)
+        1    0.000    0.000    0.544    0.544 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/openai/_utils/_utils.py:240(wrapper)
+        1    0.000    0.000    0.544    0.544 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/openai/resources/chat/completions.py:704(create)
+        1    0.000    0.000    0.527    0.527 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/openai/_base_client.py:1263(post)
+        1    0.000    0.000    0.527    0.527 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/openai/_base_client.py:940(request)
+        1    0.000    0.000    0.527    0.527 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/openai/_base_client.py:962(_request)
+        1    0.000    0.000    0.485    0.485 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpx/_client.py:891(send)
+        1    0.000    0.000    0.483    0.483 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpx/_client.py:942(_send_handling_auth)
+        1    0.000    0.000    0.483    0.483 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpx/_client.py:976(_send_handling_redirects)
+        1    0.000    0.000    0.483    0.483 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpx/_client.py:1013(_send_single_request)
+        1    0.000    0.000    0.480    0.480 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpx/_transports/default.py:217(handle_request)
+        1    0.000    0.000    0.479    0.479 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py:159(handle_request)
+        1    0.000    0.000    0.479    0.479 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpcore/_sync/connection.py:67(handle_request)
+        1    0.000    0.000    0.451    0.451 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpcore/_sync/http11.py:72(handle_request)
+        4    0.000    0.000    0.450    0.113 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpcore/_sync/http11.py:216(_receive_event)
+        1    0.000    0.000    0.450    0.450 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpcore/_sync/http11.py:179(_receive_response_headers)
+        3    0.000    0.000    0.449    0.150 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpcore/_backends/sync.py:122(read)
+        3    0.000    0.000    0.449    0.150 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/ssl.py:1288(recv)
+        3    0.000    0.000    0.449    0.150 /Users/ashish/.pyenv/versions/3.11.8/lib/python3.11/ssl.py:1157(read)
+        3    0.449    0.150    0.449    0.150 {method 'read' of '_ssl._SSLSocket' objects}
+       40    0.000    0.000    0.056    0.001 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:25(__get__)
+        4    0.000    0.000    0.054    0.014 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:233(iter_)
+        2    0.000    0.000    0.052    0.026 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/PIL/Image.py:940(convert)
+       26    0.000    0.000    0.037    0.001 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:413(pop)
+       12    0.000    0.000    0.037    0.003 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:398(sort)
+       14    0.000    0.000    0.037    0.003 {method 'sort' of 'list' objects}
+       18    0.021    0.001    0.037    0.002 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:339(count)
+       20    0.000    0.000    0.031    0.002 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/colorthief.py:229(<lambda>)
+        2    0.031    0.016    0.031    0.016 {method 'convert' of 'ImagingCore' objects}
+        1    0.000    0.000    0.028    0.028 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/httpcore/_sync/connection.py:103(_connect)
+     23/7    0.000    0.000    0.027    0.004 <frozen importlib._bootstrap>:1165(_find_and_load)
+     23/7    0.000    0.000    0.027    0.004 <frozen importlib._bootstrap>:1120(_find_and_load_unlocked)
+     23/7    0.000    0.000    0.026    0.004 <frozen importlib._bootstrap>:666(_load_unlocked)
+     21/7    0.000    0.000    0.026    0.004 <frozen importlib._bootstrap_external>:934(exec_module)
+     66/9    0.000    0.000    0.026    0.003 <frozen importlib._bootstrap>:233(_call_with_frames_removed)
+        1    0.000    0.000    0.025    0.025 /Users/ashish/Dropbox/programming/recruiter_chat/venv/lib/python3.11/site-packages/openai/_base_client.py:445(_build_request)
+
+
+127.0.0.1 - - [27/Oct/2024 00:31:07] "GET /chat/lufthansa-6jdqel4003 HTTP/1.1" 200 -
+127.0.0.1 - - [27/Oct/2024 00:31:07] "GET /static/js/chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [27/Oct/2024 00:31:07] "GET /static/css/chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [27/Oct/2024 00:31:07] "GET /static/uploads/lufthansa_logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [27/Oct/2024 00:31:07] "GET /static/assets/youtube_logo4.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [27/Oct/2024 00:31:07] "GET /static/assets/linkedin_logo2.png HTTP/1.1" 200 -
+127.0.0.1 - - [27/Oct/2024 00:31:07] "GET /static/assets/resume_signpost.jpeg HTTP/1.1" 200 -

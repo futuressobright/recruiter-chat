@@ -9,13 +9,29 @@ from database import Database
 from logger import log_session, log_interaction, configure_logging
 from image_utils import get_background_image, get_color_scheme, setup_background_image, validate_image
 from ai_utils import get_answer_from_openai, get_initial_greeting
-from path_config import PathConfig  # Add this import
+from path_config import PathConfig
+import cProfile
+import pstats
+from pstats import SortKey
+import functools
 
+def profile_view(view_func):
+    @functools.wraps(view_func)
+    def wrapped(*args, **kwargs):
+        profiler = cProfile.Profile()
+        profiler.enable()
+        try:
+            result = view_func(*args, **kwargs)
+            return result
+        finally:
+            profiler.disable()
+            print(f"\nProfile for {view_func.__name__}:")
+            stats = pstats.Stats(profiler).sort_stats(SortKey.CUMULATIVE)
+            stats.print_stats(50)
+    return wrapped
 
 load_dotenv()
-# Configure logging
 configure_logging(os.getenv("LOGTAIL_SOURCE_TOKEN"))
-
 
 class SessionManager:
     def __init__(self, employer_name):
@@ -47,7 +63,6 @@ class SessionManager:
         if session_id in self.sessions:
             self.sessions[session_id]['chat_history'] = []
 
-
 app = Flask(__name__, static_url_path='/static')
 db = Database()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -59,13 +74,11 @@ if not os.path.exists(PathConfig.UPLOADS_DIR):
     os.makedirs(PathConfig.UPLOADS_DIR)
 
 DEFAULT_COLOR_SCHEME = {
-    'dominant_color': '#000080',  # Navy blue
-    'palette': ['#FFD700', '#FFFFFF', '#000080', '#8B4513', '#A52A2A']  # Gold, White, Navy, SaddleBrown, Brown
+    'dominant_color': '#000080',
+    'palette': ['#FFD700', '#FFFFFF', '#000080', '#8B4513', '#A52A2A']
 }
 
-
 def load_config():
-    """Load configuration with consistent defaults for all required settings."""
     default_config = {
         'employer_name': 'default',
         'company_logo': 'default_background.png'
@@ -77,9 +90,7 @@ def load_config():
     except FileNotFoundError:
         return default_config
 
-
 def load_candidate_info():
-    """Load candidate information with consistent defaults."""
     default_candidate = {
         'first_name': 'Candidate',
         'linkedin_url': '',
@@ -93,23 +104,18 @@ def load_candidate_info():
     except FileNotFoundError:
         return default_candidate
 
-
-# Load configurations at startup
 config = load_config()
 candidate_info = load_candidate_info()
 session_manager = SessionManager(config['employer_name'])
 
-
 @app.route('/')
+@profile_view
 def home():
     session_id = session_manager.create_session()
     return redirect(url_for('chat_session', session_id=session_id))
 
-
-app.static_folder = 'static'
-
-
 @app.route('/chat/<session_id>')
+@profile_view
 def chat_session(session_id):
     session = session_manager.get_session(session_id)
     if not session:
@@ -142,13 +148,12 @@ def chat_session(session_id):
                            resume_url=candidate_info['resume_url'],
                            initial_greeting=initial_greeting)
 
-
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-
 @app.route('/api/chat', methods=['POST'])
+@profile_view
 def chat():
     try:
         data = request.json
@@ -170,7 +175,6 @@ def chat():
         return jsonify({'response': bot_message})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))

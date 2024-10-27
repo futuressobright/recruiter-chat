@@ -13,3 +13,4 @@ app.log.1
 candidate_info.json
 config.json
 .cache
+.cache/*
