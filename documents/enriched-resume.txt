@@ -214,8 +214,8 @@ Entrepreneurship:
 
 Best skills:
 - Very high ideaphoria - can find original and creative approach to solve any problem. E.g. his innovative approach to recruiting faculty at UC Berkeley.
-- As a manager, very good at identifying people's strengths.
-- An enthusiastic presenter.
+- As a manager, very good at identifying people's strengths, and bringing out the best from each person.
+- An enthusiastic and experienced presenter, trained at Toastmasters.
 - An excellent moderator, not afraid to cold call, and good at getting people to speak up, contribute, and collaborate. Lifts the energy of the entire group.
 - A good listener. He volunteered at the suicide hotline, and was extensively trained in empathetic listening.
 - He leverages own diverse background (culturally, and professional), to bridge gaps and build connections. He is a connector.
@@ -226,7 +226,7 @@ Weaknesses:
 
 Industry "vertical" domain experience:
 - MarTech - at Leadspace
-- Higher Education - at UC Berkeley Extension and Stanford GSB
+- Higher Education - at UC Berkeley Extension and at Stanford GSB
 - Open-source software - at Sun Microsystems and Midokura
 - Fintech and Finance - at TRW Financial Systems, Hyperion Solutions, Mercer Management Consulting
 - EdTech - at Appsembler and UC Berkeley
