@@ -4,14 +4,19 @@ from openai import OpenAI
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
+import pickle
+from pathlib import Path
 
 load_dotenv()
+
 
 class Database:
     def __init__(self):
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.cache_dir = Path(".cache")
+        self.cache_dir.mkdir(exist_ok=True)
         self.documents = self.load_documents()
-        self.embeddings = self.create_embeddings()
+        self.embeddings = self.load_or_create_embeddings()
 
     def load_documents(self) -> List[Tuple[str, str]]:
         documents = []
@@ -20,11 +25,20 @@ class Database:
             if filename.endswith('.txt'):
                 with open(os.path.join(docs_dir, filename), 'r') as f:
                     content = f.read()
-                    # Store whole document content with filename as context
                     documents.append((filename, content))
         return documents
 
-    def create_embeddings(self):
+    def load_or_create_embeddings(self):
+        embeddings_cache = self.cache_dir / "embeddings.pkl"
+
+        # Try to load cached embeddings
+        if embeddings_cache.exists():
+            print("Loading embeddings from cache...")
+            with open(embeddings_cache, "rb") as f:
+                return pickle.load(f)
+
+        # Create new embeddings if cache doesn't exist
+        print("Creating new embeddings...")
         embeddings = []
         for _, content in self.documents:
             response = self.client.embeddings.create(
@@ -32,6 +46,12 @@ class Database:
                 input=content
             )
             embeddings.append(response.data[0].embedding)
+
+        # Cache the embeddings
+        print("Caching embeddings for future use...")
+        with open(embeddings_cache, "wb") as f:
+            pickle.dump(embeddings, f)
+
         return embeddings
 
     def search(self, query: str, k: int = 5) -> List[str]:
@@ -40,21 +60,13 @@ class Database:
             input=query
         ).data[0].embedding
 
-        # Use cosine similarity
         similarities = cosine_similarity([query_embedding], self.embeddings)[0]
         top_k_indices = np.argsort(similarities)[-k:][::-1]
-        
+
         results = []
         for i in top_k_indices:
             filename, content = self.documents[i]
-            results.append(f"From {filename}: {content[:200]}...")  # Include filename and truncate long contents
-        
-        # Fallback: keyword matching
-        if not any(query.lower() in result.lower() for result in results):
-            for filename, content in self.documents:
-                if query.lower() in content.lower():
-                    results.append(f"Keyword match from {filename}: {content[:200]}...")
-                    break
+            results.append(f"From {filename}: {content[:200]}...")
 
         return results
 
