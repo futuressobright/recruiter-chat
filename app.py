@@ -12,6 +12,7 @@ from image_utils import get_background_image, get_color_scheme, setup_background
 from ai_utils import get_answer_from_openai, get_initial_greeting
 from path_config import PathConfig
 import logging
+from errors import ChatError, SessionNotFoundError, ConfigurationError
 from session_manager import SessionManager
 
 
