@@ -1,9 +1,14 @@
+import os
+from pathlib import Path
+
+DEFAULT_COLOR_SCHEME = {
+    'dominant_color': '#007bff',
+    'palette': ['#007bff', '#FFFFFF', '#f0f0f0', '#e0e0e0']
+}
+
 def get_color_scheme(image_path):
-    """Return a simple fixed color scheme, since we're using standard colors in CSS"""
-    return {
-        'dominant_color': '#007bff',  # The blue we're already using in CSS
-        'palette': ['#007bff', '#FFFFFF', '#f0f0f0', '#e0e0e0']  # Other colors from our CSS
-    }
+    """Return a simple fixed color scheme"""
+    return DEFAULT_COLOR_SCHEME
 
 def validate_image(image_path):
     """Validate that the image file exists and is accessible"""
